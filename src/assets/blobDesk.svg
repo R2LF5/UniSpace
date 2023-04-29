@@ -1,0 +1,10 @@
+<svg id="visual" viewBox="0 0 1920 1080" width="1920" height="1080" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<g transform="translate(1920, 0)">
+<path d="M0 648C-92.4 595.9 -184.8 543.7 -286.5 496.2C-388.2 448.8 -499.4 405.9 -561.2 324C-623 242.1 -635.5 121 -648 0L0 0Z" fill="#4B47C0">
+</path>
+</g>
+<g transform="translate(0, 1080)">
+<path d="M0 -648C123.2 -636.8 246.5 -625.5 324 -561.2C401.5 -496.8 433.4 -379.4 479.8 -277C526.2 -174.6 587.1 -87.3 648 0L0 0Z" fill="#4B47C0">
+</path>
+</g>
+</svg>
