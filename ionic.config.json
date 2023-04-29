@@ -1,0 +1,7 @@
+{
+  "name": "UniSpace",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

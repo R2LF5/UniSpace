@@ -1,0 +1,77 @@
+<ion-content [fullscreen]="true" class="prevent-select">
+
+  <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <!-- Top Blob -->
+    <div class="blob">
+      <svg id="desk" class="stretch" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+        <image href="../../assets/blobDesk.svg" />
+
+      </svg>
+      <svg id="mob" class="stretch" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+        <image href="../../assets/blobMob.svg" />
+
+      </svg>
+    </div>
+
+    <div class="yo meteor">
+      <svg width="200" height="200" viewBox="0 0 800 800">
+        <image href="../../assets/meteor.svg"/>
+      </svg>
+    </div>
+
+    <!--LOGO  -->
+    <button ion-button (click)="goToHomePage()">
+    <h1 class="title"><span class="uni">Uni</span><span class="space">Space</span></h1>
+    </button>
+    <!-- LOGIN FORM -->
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+  <div class=" py-8 px-4 sm:shadow-xl shadow-none sm:rounded-lg sm:px-10">
+    <form class="space-y-6" action="#" method="POST">
+      <div>
+        <div class="w-full">
+          <div class="relative h-12 w-full min-w-[200px]">
+            <input class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 border-Space bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" placeholder=" " type="Email" />
+            <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-900 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-900 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-purp peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-purp peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-purp peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+              Email
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+        <div>
+          <div class="w-full">
+            <div class="relative h-12 w-full min-w-[200px]">
+              <input class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 border-Space bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" placeholder=" " type="password" />
+              <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-900 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-900 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-purp peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-purp peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-purp peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                Password
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ion-toggle class="w-full items-center" color="secondary">Show Password</ion-toggle><br /><br />
+      <div class="w-full flex justify-center items-center">
+        <div class="flex items-center hover:scale-105 transition duration-">
+          <ion-checkbox id="remember-me" name="remember-me" color="secondary"></ion-checkbox>
+          <ion-label for="remember-me" class="ml-2 block text-sm text-Space dark:text-gray-400">Remember me</ion-label>
+        </div>
+
+
+      </div>
+
+      <div>
+        <ion-button type="submit" color="secondary" class="w mt-6 w-full text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l">Sign in</ion-button>
+      </div>
+      <div class=" w-full flex justify-center items-center text-sm hover:scale-105 transition duration-300">
+        <button ion-button (click)="goToForgotPasswordPage()"  class="font-medium text-Space dark:text-gray-400 ">Forgot your password?</button>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+</div>
+</ion-content>
+

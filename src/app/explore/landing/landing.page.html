@@ -1,0 +1,304 @@
+<ion-content>
+
+
+
+  <body>
+    <div>
+      <button ion-button (click)="goToHomePage()">
+        <h1 class="title"><span class="uni">Uni</span><span class="space">Space</span></h1>
+      </button>
+      <!-- TOP STUFF -->
+       <div class="">
+      <div class=" w-full sm:block fixed bottom-10 md:right-0 lg:top-0 ">
+        <div class=" mr-8  mt-6 flex justify-center">
+          <nav class="  dark:bg-Space shadow-xl  border-2 rounded-full overflow-hidden " aria-label="Tabs">
+            <div class="-mb-px ml-5 mr-5 flex  space-x-7">
+
+              <a href="#" class="border-transparent dark:text-white transition ease-in-out delay-75 text-gray-800 hover:text-orange-400 hover:border-orange-400 group inline-flex items-center py-4 px-1 border-b-4 font-medium text-lg ">
+                <svg class="dark:text-white text-gray-800 group-hover:text-orange-400 transition ease-in-out delay-75 -ml-0.5 mr-2 h-7  w-7 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                </svg>
+
+              <span class="hidden md:block ml-2">UniNews</span>
+            </a>
+            <a href="#" class="border-transparent dark:text-white text-gray-800 transition ease-in-out delay-75 hover:text-orange-400 hover:border-orange-400 group inline-flex items-center py-4 px-1 border-b-4 font-medium text-lg">
+
+
+              <svg  class="dark:text-white text-gray-800 group-hover:text-orange-400 -ml-0.5 mr-2 h-7 w-7 transition ease-in-out delay-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+              </svg>
+
+              <span class="hidden md:block ml-2">UniRide </span>
+            </a>
+            <a href="#" class="border-transparent transition ease-in-out delay-75 dark:text-white text-gray-800 hover:text-orange-400 hover:border-orange-400 group inline-flex items-center py-4 px-1 border-b-4 font-medium text-lg">
+
+              <svg class="dark:text-white transition ease-in-out delay-75 text-gray-800 group-hover:text-orange-400 -ml-0.5 mr-2 h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+              </svg>
+              <span class="hidden md:block ml-2">EventLink</span>
+            </a>
+            <a href="#" class="border-transparent dark:text-white transition ease-in-out delay-75 text-gray-800 hover:text-orange-400 hover:border-orange-400 group inline-flex items-center py-4 px-1 border-b-4 font-medium text-lg">
+
+
+              <svg class="dark:text-white transition ease-in-out delay-75 text-gray-800 group-hover:text-orange-400 -ml-0.5 mr-2 h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+              </svg>
+
+
+
+              <span class="hidden md:block ml-2">CourseMate</span>
+            </a>
+            </div>
+                        <!-- login button -->
+  <div class="log-but">
+    <ion-button class="login-button"
+                color="secondary"
+                fill="outline"
+                (click)="goToLoginPage()">
+      <span class="bo">Login</span>
+    </ion-button>
+  </div>
+          </nav>
+        </div>
+        <!-- component -->
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+<!-- uniride -->
+<section class=" -mt-20  hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-1 shadow-lg rounded-lg">
+          <div class="px-4 flex-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center mt-16">
+      <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+
+        <h3 class="text-2xl  font-sans mb-2 font-semibold leading-normal text-orange-500 md:block hidden">
+          " Simplify your commute with carpooling - share the ride, save the cost! "
+        </h3>
+        <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-Space dark:text-white md:block hidden">
+          Our carpooling feature provides a convenient way for students with cars to
+          offer rides to their fellow students. With just a few clicks, drivers can post
+           their travel plans and connect with riders who are looking for a lift.
+
+        </p>
+        <p class="text-lg font-sans leading-relaxed mt-0 mb-4 text-Space dark:text-white md:block hidden">
+          The feature also includes tools for coordinating pick-up and drop-off times,
+            making the process of carpooling easier and more efficient than ever.
+        </p>
+
+      </div>
+      <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+        <div class="relative flex flex-col min-w-0 break-words bg-opacity-80  w-full mb-2 shadow-lg rounded-lg bg-purplight transition ease-in-out delay-150 hover:scale-105 ">
+          <img alt="..." src="../../../assets/uniride.svg" class="w-full align-middle rounded-t-lg scale-90 mt-4 z-0">
+          <blockquote class="relative p-8 mb-4">
+          <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block h-95-px -top-94-px">
+          </svg>
+
+            <h4 class="text-2xl font-bold text-white">
+              UniRide
+            </h4>
+            <p class="text-md font-light mt-2 text-white z-10">
+              Join our carpooling community and make new friends
+               while reducing your carbon footprint.
+               Get where you need to go safely, easily,
+               and affordably with our convenient ride-sharing feature.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</section>
+<!-- eventlink -->
+<section class=" -mt-20 hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-1 shadow-lg rounded-lg">
+          <div class="px-4 flex-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center mt-16">
+      <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+
+        <h3 class="text-2xl  font-sans mb-2 font-semibold leading-normal text-orange-500 md:block hidden">
+          " Stay in the loop with EventLink - your ultimate source for campus events! "
+        </h3>
+        <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-Space dark:text-white md:block hidden">
+          Get ready for a packed schedule of exciting university events with EventLink.
+          Our feature keeps students informed about all the upcoming events, with easy sign-up and real-time participant tracking.
+          Never miss a beat with our event reminders and stay connected with event organizers to get the most out of your university experience.
+
+        </p>
+        <p class="text-lg font-sans leading-relaxed mt-0 mb-4 text-Space dark:text-white md:block hidden">
+          It's never been easier to connect and engage with your community.
+        </p>
+
+      </div>
+      <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+        <div class="relative flex flex-col min-w-0 break-words bg-opacity-80  w-full mb-2 shadow-lg rounded-lg bg-purplight transition ease-in-out delay-150 hover:scale-105">
+          <img alt="..." src="../../../assets/eventlink.svg" class="w-full align-middle rounded-t-lg scale-90 mt-4 z-0">
+          <blockquote class="relative p-8 mb-4">
+          <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block h-95-px -top-94-px">
+          </svg>
+
+            <h4 class="text-2xl font-bold text-white">
+              EventLink
+            </h4>
+            <p class="text-md font-light mt-2 text-white z-10">
+              Discover, enroll, and connect with campus events like never before with
+              EventLink. Stay informed, stay connected, and stay ahead of the game!
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</section>
+<!-- uninews -->
+<section class=" -mt-20 hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-1 shadow-lg rounded-lg">
+          <div class="px-4 flex-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center mt-16">
+      <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+
+        <h3 class="text-2xl  font-sans mb-2 font-semibold leading-normal text-orange-500 md:block hidden">
+          " Stay informed with UniNews - your one-stop-shop for all things campus-related! "
+        </h3>
+        <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-Space dark:text-white md:block hidden">
+          Stay up-to-date with everything happening in your university community with UniNews.
+           Our feature allows users to see news and updates from a variety of sources, including professors,
+           club presidents, and faculty administrators.
+        </p>
+        <p class="text-lg font-sans leading-relaxed mt-0 mb-4 text-Space dark:text-white md:block hidden">
+          With UniNews, you'll never miss an important event or announcement again.
+        </p>
+
+      </div>
+      <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+        <div class="relative flex flex-col min-w-0 break-words bg-opacity-80  w-full mb-2 shadow-lg rounded-lg bg-purplight transition ease-in-out delay-150 hover:scale-105">
+          <img alt="..." src="../../../assets/uninews.svg" class="w-full align-middle rounded-t-lg scale-75 mt-2 z-0">
+          <blockquote class="relative p-8 mb-4">
+          <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block h-95-px -top-94-px">
+          </svg>
+
+            <h4 class="text-2xl font-bold text-white">
+              UniNews
+            </h4>
+            <p class="text-md font-light mt-2 text-white z-10">
+              Stay in the loop with UniNews - your one-stop source for campus updates! Get the latest news from professors, club presidents,
+               and university administrators, all in one place.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</section>
+<!-- coursemate -->
+<section class=" -mt-20 ">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-1 shadow-lg rounded-lg">
+          <div class="px-4 flex-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center mt-16">
+      <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+
+        <h3 class="text-2xl  font-sans mb-2 font-semibold leading-normal text-orange-500 md:block hidden">
+          " Collaborate and succeed with CourseMate - the ultimate study resource sharing tool! "
+        </h3>
+        <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-Space dark:text-white md:block hidden">
+          With CourseMate, studying has never been easier. Our feature allows you to share study
+           materials and resources with your group, keeping everyone on the same page and ensuring success.
+           Plus, our app provides notifications when new materials
+          or messages are added to the group, so you never miss a beat.
+        </p>
+        <p class="text-lg font-sans leading-relaxed mt-0 mb-4 text-Space dark:text-white md:block hidden">
+          Collaborate and achieve your goals with CourseMate.
+        </p>
+
+      </div>
+      <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+        <div class="relative flex flex-col min-w-0 break-words bg-opacity-80  w-full mb-2 shadow-lg rounded-lg bg-purplight transition ease-in-out delay-150 hover:scale-105">
+          <img alt="..." src="../../../assets/coursemate.svg" class="w-full align-middle rounded-t-lg scale-75 mt-2 z-0">
+          <blockquote class="relative p-8 mb-4">
+          <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block h-95-px -top-94-px">
+          </svg>
+
+            <h4 class="text-2xl font-bold text-white">
+              CourseMate
+            </h4>
+            <p class="text-md font-light mt-2 text-white z-10">
+              Study smarter, not harder, with CourseMate. Share study materials and resources with your group and get notifications when
+              new materials or messages are added. Maximize your learning potential with CourseMate.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</section>
+      </div>
+      </div>
+      <!-- MAIN CONTENT -->
+      <!-- <app-slides [slide]="slide">
+
+      </app-slides> -->
+
+    </div>
+
+
+
+
+
+
+
+
+
+  </body>
+
+  <div class="w-full h-screen flex justify-start pt-96 ">
+    <ion-button color="secondary" (click)="goToLoginPage()">
+      <span class="boo">Next</span>
+    </ion-button>
+  </div>
+</ion-content>
