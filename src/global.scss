@@ -35,21 +35,13 @@
 .prevent-select {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none;
 }
-@layer utilities {
-  .snap {
-    scroll-snap-type: var(--scroll-snap-direction) var(--scroll-snap-constraint);
-  }
-  .snap-y {
-    --scroll-snap-direction: y;
-  }
-  .snap-mandatory {
-    --scroll-snap-constraint: mandatory;
-  }
-  .snap-start {
-    scroll-snap-align: start;
-  }
+
+
+
+/* Hide default scrollbar */
+::-webkit-scrollbar {
+  display: none;
 }
-.cursor-pointer {
-  cursor: pointer;
-}
+

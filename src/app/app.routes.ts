@@ -31,11 +31,41 @@ export const routes: Routes = [
     path: 'eventlink',
     loadComponent: () => import('./main/eventlink/eventlink.page').then( m => m.EventlinkPage)
   },
+
   {
     path: 'dashboard',
     loadComponent: () => import('./dashboard/dashboard.page').then( m => m.DashboardPage)
   },
 
+  {
+    path: 'reset-code',
+    loadComponent: () => import('./login/reset-code/reset-code.page').then( m => m.ResetCodePage)
+  },
+
+  {
+    path: 'news',
+    loadComponent: () => import('./features/news/news.page').then( m => m.NewsPage)
+  },
+  {
+    path: 'news',
+    loadComponent: () => import('./features/news/news.page').then( m => m.NewsPage)
+  },
+  {
+    path: 'uniride',
+    loadComponent: () => import('./features/uniride/uniride.page').then( m => m.UniridePage)
+  },
+  {
+    path: 'customize-profile',
+    loadComponent: () => import('./login/customize-profile/customize-profile.page').then( m => m.CustomizeProfilePage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
+  },
+  {
+    path: 'my-calander',
+    loadComponent: () => import('./my-calander/my-calander.page').then( m => m.MyCalanderPage)
+  },
 
 
 ];
