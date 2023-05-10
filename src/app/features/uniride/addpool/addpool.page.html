@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Carpooling Offer</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="uniride"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="stacked">Departure Location</ion-label>
+        <ion-input type="text" name="departureLocation" required ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Destination</ion-label>
+        <ion-input type="text" name="destination" required ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="">Departure Time</ion-label>
+        <ion-datetime class="mt-5" displayFormat="DD/MM/YYYY HH:mm" name="departureTime" required ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Available Seats</ion-label>
+        <ion-input type="number" name="availableSeats" required ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Price per Passenger</ion-label>
+        <ion-input type="number" name="pricePerPassenger" required ></ion-input>
+      </ion-item>
+<div class="w-full flex items-center justify-center">
+      <ion-button type="submit" class="w-40 " color="secondary" expand="block"> <span class="text-white"> Create Pool </span> </ion-button>
+    </div>
+    </ion-list>
+  </form>
+</ion-content>

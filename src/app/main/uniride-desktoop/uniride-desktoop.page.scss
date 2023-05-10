@@ -1,0 +1,203 @@
+
+.custom-picker {
+    --background: orange;
+  }
+  .body{
+    background: rgb(218,230,246);
+    background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
+  }
+  /* Make the SVG scale with the viewport width */
+  .meteor {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.24;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    .meteor svg image {
+      filter: invert(1);
+    }
+  }
+  
+  //meteor animation
+  .yo.meteor svg {
+  animation: meteorMove 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes meteorMove {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-9px);
+  }
+  }
+  
+  
+  /* Move the SVG behind the UniSpace logo */
+  .ion-padding {
+  position: relative;
+  }
+  
+  .yo {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  }
+  
+  /* Style the UniSpace logo */
+  .uni {
+  color: #FF7F2D;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  .space {
+  color:#263138;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    .space {
+      color:#ffffff;
+    }
+  }
+  
+  .title{
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  padding: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  z-index: 9999;
+  }
+  
+  .bo{
+  color: #FF7F2D;
+  font-weight: bold;
+  padding: 0 24px;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .boo{
+  color: white ;
+  font-weight: bold ;
+  padding: 0 24px;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  
+  .button{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  }
+  
+  .uni, .button {
+  position: relative;
+  z-index: 2;
+  }
+  
+  //Blob settings
+  .blob{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  }
+  .stretch{
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  }
+  
+  @media (min-aspect-ratio: 16/9) {
+  #desk {
+    display: block;
+  }
+  #mob {
+    display: none;
+  }
+  }
+  @media (max-aspect-ratio: 4/3) {
+  #mob {
+    display: block;
+  }
+  #desk {
+    display: none;
+  }
+  }
+  
+  
+  @media (max-width: 767px) {
+    .login-button {
+      display: none;
+    }
+  }
+  
+  
+  .custom-datetime .datetime-text:focus {
+    color: orange !important;
+  }
+  
+  
+  .log-but{
+  position: fixed;
+  top: 6%;
+  right: 2%;
+  }
+  
+  .login-button button {
+  background-color: #FF7F2D;
+  color: #FF7F2D;
+  border: none;
+  //padding: 10px 5px;
+  border-radius: 5px;
+  }
+  .dashboard{
+    background: rgb(218,230,246);
+    background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
+  }
+  
+  
+  :host {
+    display: block;
+    padding: 1rem;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  label {
+    cursor: pointer;
+  }
+  
+  label:hover {
+    background-color: #dd6b20;
+  }
+  
+  
+  
+  
+    .background-form{
+      background: rgb(218,230,246);
+      background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
+    }
+    @media (prefers-color-scheme: dark) {
+      .background-form{
+        background: #090909;
+      }
+    }
+  
+  
+  
+  

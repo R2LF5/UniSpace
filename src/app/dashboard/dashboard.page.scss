@@ -1,15 +1,11 @@
 
-
-
+.custom-picker {
+  --background: orange;
+}
 .body{
   background: rgb(218,230,246);
   background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
 }
-.dashboard{
-  background: rgb(218,230,246);
-  background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
-}
-
 /* Make the SVG scale with the viewport width */
 .meteor {
 max-width: 100%;
@@ -95,6 +91,13 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
+.button{
+position: absolute;
+top: 80%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 3;
+}
 
 .uni, .button {
 position: relative;
@@ -141,6 +144,11 @@ object-fit: fill;
 }
 
 
+.custom-datetime .datetime-text:focus {
+  color: orange !important;
+}
+
+
 .log-but{
 position: fixed;
 top: 6%;
@@ -154,5 +162,41 @@ border: none;
 //padding: 10px 5px;
 border-radius: 5px;
 }
+.dashboard{
+  background: rgb(218,230,246);
+  background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
+}
+
+
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+}
+
+label:hover {
+  background-color: #dd6b20;
+}
+
+
+
+
+  .background-form{
+    background: rgb(218,230,246);
+    background: linear-gradient(0deg, rgba(218,230,246,1) 0%, rgba(248,249,254,1) 100%);
+  }
+  @media (prefers-color-scheme: dark) {
+    .background-form{
+      background: #090909;
+    }
+  }
+
 
 

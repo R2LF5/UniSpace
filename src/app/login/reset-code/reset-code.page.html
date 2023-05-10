@@ -35,18 +35,19 @@
       
       <div class="flex flex-row space-x-4 justify-center">
         <div class="relative h-12 w-12">
-          <input class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 border-Space bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp  focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
+          <input #digit1 (input)="onDigitInput($event, digit2)" (keydown)="onKeyDown($event)" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
         </div>
         <div class="relative h-12 w-12">
-          <input class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 border-Space bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp  focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
+          <input #digit2 (input)="onDigitInput($event, digit3)" (keydown)="onKeyDown($event)" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
         </div>
         <div class="relative h-12 w-12">
-          <input class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 border-Space bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp  focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
+          <input #digit3 (input)="onDigitInput($event, digit4)" (keydown)="onKeyDown($event)" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
         </div>
         <div class="relative h-12 w-12">
-          <input class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 border-Space bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp  focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
+          <input #digit4 (input)="onDigitInput($event, digit1)" (keydown)="onKeyDown($event)" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-2xl text-center font-normal text-gray-400 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" maxlength="1" placeholder=" " type="text" />
         </div>
       </div>
+      
       
       <div class=" w-full flex justify-center items-center ">
         <label class=" text-lg  text-Space dark:text-gray-400 mr-2">
@@ -64,26 +65,4 @@
   </div>
 </div>
 </div>
-<!-- check for email/cin -->
-<script>
-
-const input = document.querySelector('#input-cin-email');
-const button = document.querySelector('#verify');
-
-button.addEventListener('click', () => {
-  const value = input.value;
-  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  const isCIN = /^\d{8}$/.test(value);
-
-  if (isEmail) {
-    alert('email is correct')
-  } else if (isCIN) {
-    alert('cin is correct')
-  } else {
-    alert('shit is incorrect')
-  }
-});
-
-
-</script>
 </ion-content>
