@@ -1,0 +1,31 @@
+#map {
+  z-index: 0;
+  width: screen;
+  height: screen;
+}
+
+.content-above-map {
+  z-index: 10;
+}
+/* resizable div */
+div[draggable] {
+  touch-action: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  resize: vertical;
+  overflow: auto;
+}
+
+/* drag handle */
+div > div {
+  cursor: move;
+}
+.leaflet-routing-container .leaflet-routing-line {
+  stroke: green;
+}
+/* Hide the default markers for the routing control */
+.leaflet-routing-container .leaflet-routing-icon {
+  display: none;
+}

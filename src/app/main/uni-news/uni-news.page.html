@@ -1,0 +1,233 @@
+
+
+  <div class="ml-5 mr-5 ">
+    <!-- post template -->
+
+      <div class="container flex flex-col w-full max-w-lg 5 p- mx-auto divide-y rounded-2xl shadow-xl divide-gray-700 bg-gray-100 z-50 dark:bg-slate-950  dark:border-2 border-purp mt-4 mb-6">
+      <div class="flex justify-between p-4">
+        <div class="flex space-x-4">
+          <div>
+            <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+          </div>
+          <div class="flex items-center justify-center ">
+          <!-- text area that automatically increases in height using tailwind and ionic  -->
+          <textarea id="text-area" placeholder="What's on your mind" class="flex  p-2 w-full h-11 border border-gray-300 rounded-xl dark:text-white dark:border-gray-600 dark:bg-slate-800 dark:focus:ring-purple-600 dark:focus:border-purple-600 dark:placeholder:text-gray-400 dark:placeholder:font-normal" placeholder
+          rows="3" cols="30" spellcheck="false" ></textarea>
+          </div>
+        </div>
+        <div class=" " >
+            <!-- submit button -->
+            <ion-button shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline" >Post</ion-button>
+
+
+
+        </div>
+      </div>
+      <div class=" space-y-8 text-sm text-white">
+
+
+
+
+        <!--Event Container  -->
+        <div *ngIf="eventFormVisible">
+          <form [formGroup]="eventForm">
+          <!-- forum stuff -->
+          <!-- Text Area for Description -->
+          <ion-item style="--background: #F7FAFC">
+            <ion-label position="stacked">Description</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+
+
+          <!-- Calendar Input for Event Date and Time -->
+          <ion-item style="--background: #F7FAFC">
+              <ion-label position="stacked">Date and Time</ion-label>
+              <div class="w-full flex justify-center items-center">
+              <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios"></ion-datetime>
+              </div>
+          </ion-item>
+
+          <!-- Select Input for Department -->
+          <ion-item style="--background: #F7FAFC">
+            <ion-label position="stacked">Department</ion-label>
+            <ion-select formControlName="department" [disabled]="eventForm.controls['allDepartments'].value">
+                <ion-select-option value="dept1">Department 1</ion-select-option>
+                <ion-select-option value="dept2">Department 2</ion-select-option>
+                <ion-select-option value="dept3">Department 3</ion-select-option>
+                <ion-select-option value="dept4">Department 4</ion-select-option>
+                <ion-select-option value="dept5">Department 5</ion-select-option>
+                <ion-select-option value="dept6">Department 6</ion-select-option>
+                <ion-select-option value="dept7">Department 7</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <!-- Toggle for All Departments -->
+        <ion-item style="--background: #F7FAFC">
+            <ion-label>All Departments</ion-label>
+            <ion-toggle formControlName="allDepartments" color="secondary"></ion-toggle>
+        </ion-item>
+
+
+    <!-- input type image with drag and drop -->
+    <ion-text class="text-black dark:text-white pt-96 pl-5">
+      Add images
+    </ion-text>
+    <div class="flex items-center justify-center w-full scale-95 ">
+      <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-52 scale-90 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
+          </div>
+          <input  title="images" id="dropzone-file" type="file" class="hidden" accept="image/*" (change)="onFileChange($event)" />
+          <!-- preview container  -->
+          <div class="flex w-96 scale-110 flex-wrap justify-center">
+            <div *ngFor="let image of previewImages" class="w-1/4 p-1">
+              <img [src]="image" alt="Preview" class="max-w-full h-auto">
+            </div>
+          </div>
+        </label>
+
+    </div>
+
+          </form>
+        </div>
+
+
+
+
+
+
+        <!-- Assigmnent -->
+
+<div *ngIf="assignmentFormVisible">
+          <form [formGroup]="assignmentForm">
+            <!-- forum stuff -->
+          <!-- Text Area for Description -->
+          <ion-item style="--background: #F7FAFC">
+            <ion-label position="stacked">Description</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+
+
+          <!-- Calendar Input for Event Date and Time -->
+          <ion-item style="--background: #F7FAFC">
+              <ion-label position="stacked">Date and Time</ion-label>
+              <div class="w-full flex justify-center items-center">
+              <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios"></ion-datetime>
+              </div>
+          </ion-item>
+<!-- Select Input for Section -->
+<ion-item style="--background: #F7FAFC">
+  <ion-label position="stacked">Section</ion-label>
+  <ion-select formControlName="section">
+    <ion-select-option value="dept1">Section 1</ion-select-option>
+    <ion-select-option value="dept2">Section 2</ion-select-option>
+    <ion-select-option value="dept3">Section 3</ion-select-option>
+    <ion-select-option value="dept4">Section 4</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<!-- Select Input for Course -->
+<ion-item style="--background: #F7FAFC">
+  <ion-label position="stacked">Course Name</ion-label>
+  <ion-select formControlName="course">
+    <ion-select-option value="dept1">1</ion-select-option>
+    <ion-select-option value="dept2">2</ion-select-option>
+    <ion-select-option value="dept3">3</ion-select-option>
+    <ion-select-option value="dept4">4</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+
+
+    <!-- input type image with drag and drop -->
+    <ion-text class="text-black dark:text-white pt-96 pl-5">
+      Add Files
+    </ion-text>
+    <div class="flex items-center justify-center w-full scale-95 ">
+      <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-52 scale-90 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
+          </div>
+          <input  title="images" id="dropzone-file" type="file" class="hidden" accept="image/*" (change)="onFileChange($event)" />
+          <!-- preview container  -->
+          <div class="flex w-96 scale-110 flex-wrap justify-center">
+            <div *ngFor="let image of previewImages" class="w-1/4 p-1">
+              <img [src]="image" alt="Preview" class="max-w-full h-auto">
+            </div>
+          </div>
+        </label>
+
+    </div>
+
+          </form>
+        </div>
+      </div>
+      <!-- post type -->
+      <div class=" space-y-8 text-sm text-white">
+        <div class="grid grid-cols-4 text-black dark:text-white h-full">
+          <button [class.bg-gray-200]="updateSelected" (click)="selectUpdate()" class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-bl-2xl  dark:block w-full h-16">
+            Update
+          </button>
+          <button [class.bg-gray-200]="assignmentSelected" (click)="selectAssignment()" class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16">
+            Assignment
+          </button><button [class.bg-gray-200]="assignmentSelected" (click)="selectAssignment()" class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16">
+            Course
+          </button>
+          <button [class.bg-gray-200]="eventSelected" (click)="selectEvent()" class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-br-2xl  dark:block w-full h-16">
+            Event
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- news template -->
+  <div class="container flex flex-col w-full max-w-lg 5 p- mx-auto divide-y rounded-2xl shadow-xl divide-gray-700 bg-purp  dark:bg-black  dark:border-2 border-purp mt-4 mb-6">
+      <div class="flex justify-between p-4">
+        <div class="flex space-x-4">
+          <div>
+            <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+          </div>
+          <div>
+            <h4 class="font-bold text-xl text-orange-500">Name Here</h4>
+            <span class="text-xs text-white">2 days ago</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 " >
+
+          <button title="AddToCalendar">
+           <ion-icon name="calendar-outline" class="scale-150" color="light"></ion-icon>
+          </button>
+          <button  title="settings" (click)="presentActionSheet()">
+            <ion-icon name="ellipsis-vertical" color="light"></ion-icon>
+          </button>
+
+
+        </div>
+      </div>
+      <div class="p-4 space-y-8 text-sm text-white">
+        <p class="mb-8">Vivamus sit amet turpis leo. Praesent varius eleifend elit, eu dictum lectus consequat vitae. Etiam ut dolor id justo fringilla finibus.</p>
+        <div class="w-36 ">
+        <a href="/path/to/file.pdf" download class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-2 rounded flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+           Download File
+        </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+

@@ -1,0 +1,394 @@
+<div class="relative ">
+  <div class="" >
+    <!--  -->
+     <div class="flex justify-end items-end w-screen">
+      <div class="absolute bottom-0 z-40">
+
+    </div>
+    </div>
+    <!-- Minimized -->
+    <button ion-button  title="closeb" class="z-50 hidden md:block "  id="down" *ngIf="isMinimized" (click)="maximizeMenu()">
+      <div class="fixed sm:hidden hidden  md:block bg-white dark:bg-black w-1/3 z-30 lg:right-10  bottom-5  md:right-3 h-14  overflow-scroll rounded-2xl shadow-2xl hover:scale-y-110  transition duration-300 ease-in-out">
+        <div class="scale-110 absolute top-5 right-5">
+        <ion-icon name="chevron-up-outline" class="scale-150"></ion-icon>
+        </div>
+      </div>
+    </button>
+
+    <!-- LG blob -->
+    <div class="hidden" id="menu" [ngClass]="{ 'hidden': isMenuHidden }">
+    <div class="fixed sm:hidden hidden  md:block bg-white dark:bg-black w-1/3 z-30 lg:right-10 lg:top-10 bottom-5 md:top-56  md:right-3  overflow-scroll rounded-2xl shadow-2xl ">
+      <div>
+        <aside class="">
+          <div>
+            <h1 class="mt-10 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Description</h1>
+            <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
+               la composition et la mise en page avant impression. Le Lorem Ipsum est
+               le faux texte standard de l'imprimerie depuis les années 1500, quand un
+               imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen
+               imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen
+            </p>
+            <h2 class="mt-4 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white">Tags</h2>
+            <div class="flex flex-col justify-center items-center ">
+              <button type="button" class=" mb-2 w-52 h-10 p-2  bg-purp border border-gray-200 rounded-lg shadow  dark:bg-white dark:border-gray-700 ">
+                <h5 class="mb-2 text-sm font-bold tracking-tight text-white dark:text-Space ">GLSI</h5>
+              </button>
+              <button type="button" class=" mb-2 w-52 h-10 p-2  bg-purp border border-gray-200 rounded-lg shadow  dark:bg-white dark:border-gray-700 ">
+                <h5 class="mb-2 text-sm font-bold tracking-tight text-white dark:text-Space">GLSI</h5>
+              </button>
+            </div>
+            <img src="../../../assets/R.jpg" alt="" class="rounded-lg scale-90 mt-4">
+          </div>
+          <div class="grid grid-cols-2 divide-x">
+            <div>
+              <h1 class="mt-8 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Date</h1>
+              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
+                la composition et la mise en page avant impression.
+              </p>
+            </div>
+            <div>
+              <h1 class="mt-8 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Event Location</h1>
+              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
+                la composition et la mise en page avant impression.
+              </p>
+            </div>
+          </div>
+          <div>
+            <h1 class="mt-10 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Organizer</h1>
+            <div class="w-full h-16 scale-90 mb-8">
+              <!-- Profile Card -->
+              <div class="rounded-lg shadow-lg  w-full flex flex-row flex-wrap p-3 antialiased bg-purp dark:bg-purp " >
+                <div class="md:w-2/3 w-full px-3 flex flex-row flex-wrap">
+                  <div class="w-full text-start text-gray-700 font-semibold relative pt-3 md:pt-0 ">
+                    <div class="text-2xl text-white leading-tight ">IEEE</div>
+                    <div class="text-normal text-gray-300 hover:text-gray-400 cursor-pointer"><span class="border-b border-dashed border-gray-500 pb-1">Khaled Dhif</span></div>
+                    <div class="text-normal text-gray-300 hover:text-gray-400 "><span class="border-b border-dashed border-gray-500 pb-1">Email</span></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </aside>
+      </div>
+      <button ion-button title="closeb" class="absolute top-5 right-5 scale-150" (click)="minimizeMenu()">
+        <ion-icon name="close-circle-outline" class="scale-105"></ion-icon>
+      </button>
+    </div>
+    </div>
+
+
+
+
+
+       <!-- MD blob -->
+       <div id="menu" [ngClass]="{ 'hidden': isMenuHidden }" class="fixed md:w-screen block md:hidden lg:hidden bg-white dark:bg-black h-2/3 z-30 left-3 right-3  bottom-0 rounded-t-2xl shadow-2xl overflow-scroll">
+        <div>
+          <aside class="">
+            <div>
+              <h1 class="mt-10 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Description</h1>
+              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
+                 la composition et la mise en page avant impression. Le Lorem Ipsum est
+                 le faux texte standard de l'imprimerie depuis les années 1500, quand un
+                 imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen
+                 imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen
+              </p>
+              <h2 class="mt-4 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white">Tags</h2>
+              <div class="flex flex-col justify-center items-center ">
+                <button type="button" class=" mb-2 w-52 h-10 p-2  bg-purp border border-gray-200 rounded-lg shadow  dark:bg-white dark:border-gray-700 ">
+                  <h5 class="mb-2 text-sm font-bold tracking-tight text-white dark:text-Space ">GLSI</h5>
+                </button>
+                <button type="button" class=" mb-2 w-52 h-10 p-2  bg-purp border border-gray-200 rounded-lg shadow  dark:bg-white dark:border-gray-700 ">
+                  <h5 class="mb-2 text-sm font-bold tracking-tight text-white dark:text-Space">GLSI</h5>
+                </button>
+              </div>
+              <img src="../../../assets/R.jpg" alt="" class="rounded-lg scale-90 mt-4">
+            </div>
+            <div class="grid grid-cols-2 divide-x">
+              <div>
+                <h1 class="mt-8 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Date</h1>
+                <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
+                  la composition et la mise en page avant impression.
+                </p>
+              </div>
+              <div>
+                <h1 class="mt-8 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Event Location</h1>
+                <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
+                  la composition et la mise en page avant impression.
+                </p>
+              </div>
+            </div>
+            <div>
+              <h1 class="mt-10 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Organizer</h1>
+              <div class="w-full h-16 scale-90 mb-8">
+                <!-- Profile Card -->
+                <div class="rounded-lg shadow-lg  w-full flex flex-row flex-wrap p-3 antialiased bg-purp dark:bg-purp " >
+                  <div class="md:w-2/3 w-full px-3 flex flex-row flex-wrap">
+                    <div class="w-full text-start text-gray-700 font-semibold relative pt-3 md:pt-0 ">
+                      <div class="text-2xl text-white leading-tight ">IEEE</div>
+                      <div class="text-normal text-gray-300 hover:text-gray-400 cursor-pointer"><span class="border-b border-dashed border-gray-500 pb-1">Khaled Dhif</span></div>
+                      <div class="text-normal text-gray-300 hover:text-gray-400 "><span class="border-b border-dashed border-gray-500 pb-1">Email</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </aside>
+        </div>
+        <button ion-button title="closeb" class="absolute top-5 right-5 scale-150" (click)="minimizeMenu()">
+          <ion-icon name="close-circle-outline" class="scale-105"></ion-icon>
+        </button>
+      </div>
+    <!-- MAIN STUFF  -->
+    <aside class="   z-10   mt-4 " >
+      <div class="ml-6 mr-6 z-10 relative overflow-hidden rounded-lg bg-cover bg-no-repeat p-12 text-center" style="background-image: url('https://mdbootstrap.com/img/new/standard/nature/051.jpg'); height: 350px">
+        <div class="">
+          <ion-button class="login-button ml-12 "
+                      color="secondary"
+                      fill="outline">
+            <span class="bo">join now</span>
+          </ion-button>
+        </div>
+      <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.6)">
+        <div class="flex h-full items-center justify-center">
+          <div class="text-white ">
+            <h4 class="mb-4 text-3xl font-sans ml-8">Hurry Up!Battle Start Soon</h4>
+            <h2 class="mb-4 text-4xl font-semibold ml-8" >Eventer Music Festival</h2>
+            <h3 class="mb-4 text-sm font-sans  ml-8">April 14-17-2023 | Info Club | Faculty Of Tunisia</h3>
+            <ion-button class="flex justify-center mt-10 px-28  " color="secondary" >
+              <span class="boo">More details</span>
+            </ion-button>
+            <div class="flex justify-center items-center  ml-8 mt-2 font-sans ">
+              <div class=" text-white  font-semibold text-xl p-4 rounded-md mr-2">
+                <div class="text-2xl " id="days">01</div>
+                <div class="text-xl">Days</div>
+              </div>
+              <div class=" text-white  font-semibold text-xl p-4 rounded-md mr-2">
+                <div class="text-2xl " id="days">09</div>
+                <div class="text-xl">Hours</div>
+              </div>
+              <div class=" text-white  font-semibold text-xl p-4 rounded-md mr-2">
+                <div class="text-2xl " id="days">33</div>
+                <div class="text-xl">Minutes</div>
+              </div>
+              <div class=" text-white  font-semibold text-xl p-4 rounded-md mr-2">
+                <div class="text-2xl " id="days">36</div>
+                <div class="text-xl">Seconds</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+            </div>
+      <div>
+
+        <div class="overflow-y-auto  z-40  mr-3">
+          <div class=" grid grid-cols-2 gap-3 content-start">
+            <span class="mt-6 text-xl font-bold ml-8">Events You May Like</span>
+            <div class="flex flex-row-reverse  rounded-lg ">
+              <ion-searchbar show-clear-button="always" value="" color="space"  class="py-5 w-52  text-orange-500"></ion-searchbar>
+            </div>
+          </div>
+          <div class="grid lg:grid-cols-3 gap-6 md:grid-cols-2 grid-cols-1 ">
+
+
+            <button (click)="toggleMenu()">
+            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
+              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+              <div class="">
+                <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
+                <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>
+                <ion-icon name="add-circle-outline" class="absolute top-2 right-2 text-green-700 mr-8 font-bold w-7 h-7"></ion-icon>
+              </div>
+              <div class="">
+              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                <div>
+                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
+                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-datetime-button datetime="datetime"  class="custom-picker"></ion-datetime-button>
+                  <ion-modal [keepContentsMounted]="true">
+                    <ng-template>
+                    <ion-datetime id="datetime" disabled></ion-datetime>
+                  </ng-template>
+                  </ion-modal>
+                </div>
+
+              </ion-card-header>
+
+              <ion-card-content class="text-Space dark:text-white dark:bg-gray-950">
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </div>
+            </ion-card>
+            </button>
+            <button (click)="toggleMenu()">
+            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
+              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+              <div class="">
+                <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
+                <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>
+                <ion-icon name="add-circle-outline" class="absolute top-2 right-2 text-green-700 mr-8 font-bold w-7 h-7"></ion-icon>
+              </div>
+              <div class="">
+              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                <div>
+                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
+                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-datetime-button datetime="datetime"  class="custom-picker"></ion-datetime-button>
+                  <ion-modal [keepContentsMounted]="true">
+                    <ng-template>
+                    <ion-datetime id="datetime" disabled></ion-datetime>
+                  </ng-template>
+                  </ion-modal>
+                </div>
+
+              </ion-card-header>
+
+              <ion-card-content class="text-Space dark:text-white dark:bg-gray-950">
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </div>
+            </ion-card>
+            </button>
+            <button (click)="toggleMenu()">
+            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
+              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+              <div class="">
+                <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
+                <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>
+                <ion-icon name="add-circle-outline" class="absolute top-2 right-2 text-green-700 mr-8 font-bold w-7 h-7"></ion-icon>
+              </div>
+              <div class="">
+              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                <div>
+                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
+                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-datetime-button datetime="datetime"  class="custom-picker"></ion-datetime-button>
+                  <ion-modal [keepContentsMounted]="true">
+                    <ng-template>
+                    <ion-datetime id="datetime" disabled></ion-datetime>
+                  </ng-template>
+                  </ion-modal>
+                </div>
+
+              </ion-card-header>
+
+              <ion-card-content class="text-Space dark:text-white dark:bg-gray-950">
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </div>
+            </ion-card>
+            </button>
+            <button (click)="toggleMenu()">
+            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
+              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+              <div class="">
+                <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
+                <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>
+                <ion-icon name="add-circle-outline" class="absolute top-2 right-2 text-green-700 mr-8 font-bold w-7 h-7"></ion-icon>
+              </div>
+              <div class="">
+              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                <div>
+                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
+                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-datetime-button datetime="datetime"  class="custom-picker"></ion-datetime-button>
+                  <ion-modal [keepContentsMounted]="true">
+                    <ng-template>
+                    <ion-datetime id="datetime" disabled></ion-datetime>
+                  </ng-template>
+                  </ion-modal>
+                </div>
+
+              </ion-card-header>
+
+              <ion-card-content class="text-Space dark:text-white dark:bg-gray-950">
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </div>
+            </ion-card>
+            </button>
+            <button (click)="toggleMenu()">
+            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
+              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+              <div class="">
+                <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
+                <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>
+                <ion-icon name="add-circle-outline" class="absolute top-2 right-2 text-green-700 mr-8 font-bold w-7 h-7"></ion-icon>
+              </div>
+              <div class="">
+              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                <div>
+                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
+                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-datetime-button datetime="datetime"  class="custom-picker"></ion-datetime-button>
+                  <ion-modal [keepContentsMounted]="true">
+                    <ng-template>
+                    <ion-datetime id="datetime" disabled></ion-datetime>
+                  </ng-template>
+                  </ion-modal>
+                </div>
+
+              </ion-card-header>
+
+              <ion-card-content class="text-Space dark:text-white dark:bg-gray-950">
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </div>
+            </ion-card>
+            </button>
+            <button (click)="toggleMenu()">
+            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
+              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+              <div class="">
+                <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
+                <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>
+                <ion-icon name="add-circle-outline" class="absolute top-2 right-2 text-green-700 mr-8 font-bold w-7 h-7"></ion-icon>
+              </div>
+              <div class="">
+              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                <div>
+                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
+                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-datetime-button datetime="datetime"  class="custom-picker"></ion-datetime-button>
+                  <ion-modal [keepContentsMounted]="true">
+                    <ng-template>
+                    <ion-datetime id="datetime" disabled></ion-datetime>
+                  </ng-template>
+                  </ion-modal>
+                </div>
+
+              </ion-card-header>
+
+              <ion-card-content class="text-Space dark:text-white dark:bg-gray-950">
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </div>
+            </ion-card>
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </aside>
+
+  </div>
+<div>

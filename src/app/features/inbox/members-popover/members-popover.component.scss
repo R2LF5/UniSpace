@@ -1,0 +1,25 @@
+.popover-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+
+
+}
+
+
+
+.popover-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+ion-backdrop {
+  z-index: 999;
+  opacity: 0.5;
+}

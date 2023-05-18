@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true" class="prevent-select ">
+
+  <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <!-- Top Blob -->
+    <div class="blob">
+      <svg id="desk" class="stretch" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+        <image href="../../assets/blobDesk.svg" />
+
+      </svg>
+      <svg id="mob" class="stretch" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+        <image href="../../assets/blobMob.svg" />
+
+      </svg>
+    </div>
+
+    <div class="yo meteor">
+      <svg width="200" height="200" viewBox="0 0 800 800">
+        <image href="../../assets/meteor.svg"/>
+      </svg>
+    </div>
+
+    <!--LOGO  -->
+      
+    <!-- LOGIN FORM -->
+    <div class="-mt-14 sm:mx-auto sm:w-full sm:max-w-md">
+  <div class=" py-8 px-4 sm:shadow-xl shadow-none sm:rounded-lg sm:px-10">
+    <form class="space-y-6" action="#" method="POST">
+      <div class="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-purp  dark:bg-purp border-2 ">
+        <div class="mb-8">
+          <h2 class="block mb-2 text-xl font-medium dark:text-space text-white text-center -mt-2">Select Department</h2>
+          <div class="grid grid-cols-2 divide-y dark:text-space text-white">
+            <!-- math -->
+            <img src="../../../assets/Math.jpg" alt="" class="rounded-lg scale-90 mt-4 "
+              [ngClass]="{'border-4 border-orange-500 border-solid': buttonsState[0]}"
+              (click)="selectedButtonIndex = 0; buttonsState = [false, false, false, false, false, false]; buttonsState[0] = true;">
+            <!-- physics -->
+            <img src="../../../assets/physics.jpg" alt="" class="rounded-lg scale-90 mt-4"
+              [ngClass]="{'border-4 border-orange-500 border-solid': buttonsState[1]}"
+              (click)="selectedButtonIndex = 1; buttonsState = [false, false, false, false, false, false]; buttonsState[1] = true;">
+            <!-- computer -->
+            <img src="../../../assets/computer.jpg" alt="" class="rounded-lg scale-90 mt-4"
+              [ngClass]="{'border-4 border-orange-500 border-solid': buttonsState[2]}"
+              (click)="selectedButtonIndex = 2; buttonsState = [false, false, false, false, false, false]; buttonsState[2] = true;">
+            <!-- biology -->
+            <img src="../../../assets/biology.jpg" alt="" class="rounded-lg scale-90 mt-4"
+              [ngClass]="{'border-4 border-orange-500 border-solid': buttonsState[3]}"
+              (click)="selectedButtonIndex = 3; buttonsState = [false, false, false, false, false, false]; buttonsState[3] = true;">
+            <!-- giology -->
+            <img src="../../../assets/geology.jpg" alt="" class="rounded-lg scale-90 mt-4"
+              [ngClass]="{'border-4 border-orange-500 border-solid': buttonsState[4]}"
+              (click)="selectedButtonIndex = 4; buttonsState = [false, false, false, false, false, false]; buttonsState[4] = true;">
+            <!-- chemistry -->
+            <img src="../../../assets/chemistry.jpg" alt="" class="rounded-lg scale-90 mt-4"
+              [ngClass]="{'border-4 border-orange-500 border-solid': buttonsState[5]}"
+              (click)="selectedButtonIndex = 5; buttonsState = [false, false, false, false, false, false]; buttonsState[5] = true;">
+          </div>
+          
+          <div>
+            <ion-button (click)="navigateToSelectedDepartment()" type="submit" color="secondary" class="mt-8 w-full text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l -mb-14">Next</ion-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</ion-content>
+

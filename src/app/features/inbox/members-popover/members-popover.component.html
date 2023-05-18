@@ -1,0 +1,20 @@
+
+<div class="yo">
+  <ion-list class="h-full rounded-xl">
+    <!-- <ion-row class="ion-justify-content-end absolute -mt-3 -ml-1">
+      <ion-col size="auto">
+        <ion-button fill="clear" color="secondary" (click)="closePopover()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row> -->
+    <ion-item *ngFor="let member of members">
+      <ion-avatar slot="start">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">
+      </ion-avatar>
+      <button>
+        <ion-label>{{ member.name }}</ion-label>
+      </button>
+    </ion-item>
+  </ion-list>
+</div>
