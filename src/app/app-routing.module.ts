@@ -90,6 +90,10 @@ const routes: Routes = [
     loadChildren: () => import('./department/chemistry/chemistry.module').then( m => m.ChemistryPageModule)
   },
   {
+    path:'setup',
+    loadChildren : () => import('./login/setup-profile/setup-profile.module').then(m => m.SetupProfilePageModule)
+  },
+  {
     path: 'math',
     loadChildren: () => import('./department/math/math.module').then( m => m.MathPageModule)
   },
@@ -97,6 +101,11 @@ const routes: Routes = [
     path: 'physics',
     loadChildren: () => import('./department/physics/physics.module').then( m => m.PhysicsPageModule)
   },
+  {
+    path: 'dep',
+    loadChildren: () => import('./login/dep-section/dep-section.module').then( m => m.DepSectionPageModule)
+  },
+
   {
     path: 'computer',
     loadChildren: () => import('./department/computer/computer.module').then( m => m.ComputerPageModule)
@@ -112,6 +121,18 @@ const routes: Routes = [
   {
     path: 'add-event',
     loadChildren: () => import('./main/add-event/add-event.module').then( m => m.AddEventPageModule)
+  },
+  {
+    path: 'forgotPassword',
+    loadChildren: () => import('./login/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'reset-code',
+    loadChildren: () => import('./login/reset-code/reset-code.module').then( m => m.ResetCodePageModule)
+  },
+  {
+    path: 'reset',
+    loadChildren: () => import('./login/new-password/new-password.module').then( m => m.NewPasswordPageModule)
   },
 ];
 
