@@ -11,13 +11,26 @@
           </div>
           <div class="flex items-center justify-center ">
           <!-- text area that automatically increases in height using tailwind and ionic  -->
-          <textarea id="text-area" placeholder="What's on your mind" class="flex  p-2 w-full h-11 border border-gray-300 rounded-xl dark:text-white dark:border-gray-600 dark:bg-slate-800 dark:focus:ring-purple-600 dark:focus:border-purple-600 dark:placeholder:text-gray-400 dark:placeholder:font-normal" placeholder
-          rows="3" cols="30" spellcheck="false" ></textarea>
+          <textarea
+          id="text-area"
+          placeholder="What's on your mind"
+          class="flex max-h-48 min-h-10  p-2 w-full h-11 border border-gray-300 rounded-xl dark:text-white dark:border-gray-600 dark:bg-slate-800 dark:focus:ring-purple-600 dark:focus:border-purple-600 dark:placeholder:text-gray-400 dark:placeholder:font-normal resize-y"
+          rows="3"
+          cols="30"
+          spellcheck="false"
+          [(ngModel)]="descUpdate"
+          maxlength="255"
+          ></textarea>
+          <div class="text-right text-xs text-gray-500 ">
+            {{ descUpdate.length }} / 255
+          </div>
+
+
           </div>
         </div>
-        <div class=" " >
+        <div class=" "  >
             <!-- submit button -->
-            <ion-button shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline" >Post</ion-button>
+            <ion-button (click)="submitUpdate()" shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline" >Post</ion-button>
 
 
 
@@ -81,7 +94,7 @@
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
           </div>
-          <input  title="images" id="dropzone-file" type="file" class="hidden" accept="image/*" (change)="onFileChange($event)" />
+          <input  title="images" id="dropzone" type="file" class="hidden" accept="image/*" (change)="onFileChange($event)" />
           <!-- preview container  -->
           <div class="flex w-96 scale-110 flex-wrap justify-center">
             <div *ngFor="let image of previewImages" class="w-1/4 p-1">
@@ -192,15 +205,17 @@
     </div>
 
     <!-- news template -->
-  <div class="container flex flex-col w-full max-w-lg 5 p- mx-auto divide-y rounded-2xl shadow-xl divide-gray-700 bg-purp  dark:bg-black  dark:border-2 border-purp mt-4 mb-6">
+    <div *ngFor="let post of posts" class="container flex flex-col w-full max-w-lg 5 p- mx-auto divide-y rounded-2xl shadow-xl divide-gray-700 bg-purp  dark:bg-black  dark:border-2 border-purp mt-4 mb-6" [ngClass]="{'hidden': post.hidden}">
       <div class="flex justify-between p-4">
         <div class="flex space-x-4">
           <div>
             <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
           </div>
           <div>
-            <h4 class="font-bold text-xl text-orange-500">Name Here</h4>
-            <span class="text-xs text-white">2 days ago</span>
+            <h4 *ngIf="post.admin!==null" class="font-bold text-xl text-orange-500">{{post.admin.firstName +' '+post.admin.lastName}}</h4>
+            <h4 *ngIf="post.professor!==null" class="font-bold text-xl text-orange-500">{{post.professor.firstName +' '+post.professor.lastName}}</h4>
+
+            <span class="text-xs text-white">{{ post.formattedTimestamp }}</span>
           </div>
         </div>
         <div class="flex items-center space-x-2 " >
@@ -208,7 +223,7 @@
           <button title="AddToCalendar">
            <ion-icon name="calendar-outline" class="scale-150" color="light"></ion-icon>
           </button>
-          <button  title="settings" (click)="presentActionSheet()">
+          <button  title="settings" (click)="presentActionSheet(post.id)">
             <ion-icon name="ellipsis-vertical" color="light"></ion-icon>
           </button>
 
@@ -216,18 +231,20 @@
         </div>
       </div>
       <div class="p-4 space-y-8 text-sm text-white">
-        <p class="mb-8">Vivamus sit amet turpis leo. Praesent varius eleifend elit, eu dictum lectus consequat vitae. Etiam ut dolor id justo fringilla finibus.</p>
-        <div class="w-36 ">
-        <a href="/path/to/file.pdf" download class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-2 rounded flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 mr-2">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-          </svg>
-           Download File
-        </a>
+        <p class="">{{post.description}}</p>
+        <div class="w-36 mt -8 " *ngIf="post.type === 'Course' || post.type === 'Assignment'">
+          <a href="/path/to/file.pdf" download class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-2 rounded flex items-center">
+            <ion-icon class="h-5 w-5 mr-2" name="cloud-download"></ion-icon>
+            Download File
+          </a>
         </div>
+
       </div>
 
+
     </div>
+
+
   </div>
 
 

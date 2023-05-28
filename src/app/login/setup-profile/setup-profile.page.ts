@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 
 import { Router } from '@angular/router';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
+import { UserUniService } from '../../services/user-uni.service';
 
 @Component({
   selector: 'app-setup-profile',
@@ -11,18 +13,71 @@ import { Router } from '@angular/router';
 })
 export class SetupProfilePage implements OnInit {
 
-  constructor(private router: Router) {
+  formUpdate: FormGroup;
 
+  constructor(private router: Router, private alertController: AlertController, private builder:FormBuilder, private useruniService: UserUniService) {
+    this.formUpdate= this.builder.group({
+      id:[''],
+      firstName: [''],
+      lastName:[''],
+      phoneNumber:['']
+    })
   }
+  firstName: string = '';
+  lastName: string = '';
 
-  goToForgotPasswordPage() {
-    this.router.navigateByUrl('/forgot-password');
-  }
-  goToHomePage() {
-    this.router.navigateByUrl('/home');
-  }
+  @ViewChild('firstNameInput') firstNameInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('lastNameInput') lastNameInput: ElementRef<HTMLInputElement> | undefined;
+
   ngOnInit() {
+    const storedFirstName = localStorage.getItem('firstName') || '';
+    const storedLastName = localStorage.getItem('lastName') || '';
+    this.firstName = storedFirstName.charAt(0).toUpperCase() + storedFirstName.slice(1);
+    this.lastName = storedLastName.charAt(0).toUpperCase() + storedLastName.slice(1);
   }
+
+
+  capitalizeInputValue(input: HTMLInputElement) {
+    const initialValue = input.value;
+    input.value = initialValue.charAt(0).toUpperCase() + initialValue.slice(1);
+  }
+
+  onFirstNameChange(event: any) {
+    this.firstName = event;
+  }
+
+  onLastNameChange(event: any) {
+    this.lastName = event;
+  }
+
+  phoneNumber: string = '';
+
+
+  async showAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+  handleUnformattedInput(event: any) {
+    this.unformattedPhoneNumber = event.detail;
+  }
+
+  unformattedPhoneNumber: string = '';
+
+
+  validatePhoneNumber() {
+    if (this.unformattedPhoneNumber.length !== 8) {
+      this.showAlert('Phone number must be 8 digits long');
+    }
+  }
+
+
+
+
   imageSrc = '';
 
   uploadImage() {
@@ -66,7 +121,19 @@ export class SetupProfilePage implements OnInit {
     });
     input.click();
   }
+  update() {
+    this.formUpdate= this.builder.group({
+      id:[localStorage.getItem('id')],
+      firstName: [this.firstName],
+      lastName:[this.lastName],
+      phoneNumber:[this.phoneNumber]
+    })
+    this.useruniService.updateUser(this.formUpdate.value).subscribe(res=>{
+      // clear local storage
+      localStorage.removeItem('firstName')
+      localStorage.removeItem('lastName')
+    })
 
   }
 
-
+}

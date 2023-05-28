@@ -4,6 +4,12 @@
   height: screen;
 }
 
+.leaflet-routing-instructions {
+  display: none !important;
+}
+
+
+
 .content-above-map {
   z-index: 10;
 }
@@ -29,3 +35,4 @@ div > div {
 .leaflet-routing-container .leaflet-routing-icon {
   display: none;
 }
+

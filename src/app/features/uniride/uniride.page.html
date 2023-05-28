@@ -1,4 +1,4 @@
-
+<div class="h-screen overflow-hidden">
 
   <div class="z-0">
     <div #map id="map" class="h-screen"></div>
@@ -7,6 +7,47 @@
   <div class="absolute inset-x-0 bottom-0 h-64 bg-white dark:bg-black z-40 rounded-t-3xl w-full shadow-3xl grid grid-cols-1 overflow-hidden">
 
 <!-- search here -->
+<div class="h-full grid grid-cols-1 pt-5">
+  <form action="">
+  <span class="pl-6 -mb-5 font-mono"> Set Depart</span>
+  <div class=" flex justify-between">
+    <ion-searchbar id="departSearchbar" show-clear-button="always" value="FST" mode="ios" class="w-5/6" (ionChange)="onSearchChange($event, 'depart')"></ion-searchbar>
+    <div class="pl-5  w-1/6  grid grid-cols-2">
+      <div class="pt-5  right-0">
+        <button title="depCurrent" (click)="setLocationToCurrent('depCurrent')">
+          <ion-icon name="locate-outline" class="h-6 w-6"></ion-icon>
+        </button>
+      </div>
+
+      <div class=" pt-5 right-0 ">
+        <button title="depFST" (click)="setLocationToFST('depFST')">
+
+          <ion-icon name="school-outline" class=" h-6 w-6  " ></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <span class="pl-6 -mb-5 font-mono"> Set Destination</span>
+  <div class=" flex justify-between">
+    <ion-searchbar id="arrivalSearchbar" show-clear-button="always" value="Always Show" mode="ios" class="w-5/6" (ionChange)="onSearchChange($event, 'arrival')"></ion-searchbar>
+    <div class="pl-5 w-1/6  grid grid-cols-2">
+      <div class="pt-5 right-0">
+        <button title="arrCurrent" (click)="setLocationToCurrent('arrCurrent')" class="z-50" >
+          <ion-icon name="locate-outline" class="h-6 w-6"></ion-icon>
+        </button>
+      </div>
+
+      <div class="pt-5 right-0 ">
+        <button title="arrFST" (click)="setLocationToFST('arrFST')">
+          <ion-icon name="school-outline" class=" h-6 w-6  " ></ion-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+  </form>
+</div>
 
 
 
@@ -27,15 +68,15 @@
       </svg>
     </div>
   </button>
-  <button title="currentlocation" ion-button color="secondary" class="absolute h-14 w-14 focus:bg-gray-950 rounded-full bottom-1/3 z-50 bg-gray-800 left-2 shadow-xl" (click)="centerToCurrentLocation()">
+  <button title="currentlocation" ion-button color="secondary" class="absolute h-14 w-14 focus:bg-gray-950 rounded-full bottom-1/3 z-50 bg-gray-800 left-2 shadow-xl dark:bg-white" (click)="centerToCurrentLocation()">
     <div class="w-full h-full flex items-center text-center justify-center scale-90">
 
-      <ion-icon name="locate" color="light w-10 h-10"></ion-icon>
+      <ion-icon name="locate" color="light" class="w-10 h-10"></ion-icon>
 
     </div>
   </button>
 
-  <button title="Message" ion-button color="secondary" class="absolute h-14 w-14 focus:bg-gray-950 rounded-full top-5 right-5 z-50 bg-gray-800 shadow-xl" (click)="navigateToInbox()">
+  <button title="Message" ion-button color="secondary" class="absolute h-14 w-14 focus:bg-gray-950 rounded-full top-5 right-5 z-50 bg-gray-800 shadow-xl dark:bg-white" (click)="navigateToInbox()">
     <div class="w-full h-full flex items-center text-center justify-center scale-90">
       <ion-icon name="paper-plane" color="light" class="w-9 h-9 scale-90"></ion-icon>
     </div>
@@ -46,3 +87,4 @@
 
 
 
+</div>

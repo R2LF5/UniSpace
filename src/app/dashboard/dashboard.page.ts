@@ -1,8 +1,8 @@
 import { OnInit, Component, ElementRef, Renderer2, ViewChild, HostListener, Inject  } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { ActionSheetController, Platform } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core';
+import { ActionSheetController} from '@ionic/angular';
+import { ThemeService } from '../services/theme.service'; // adjust the path as needed
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +14,13 @@ export class DashboardPage implements OnInit {
   menuType: string = 'overlay';
 
   constructor(
+    private themeService: ThemeService,
     private router: Router,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
     public actionSheetController: ActionSheetController,
-    private platform: Platform
-  ) {
+
+  ){
     // initialize isMenuHidden based on screen size
     const screenWidth = window.innerWidth;
     if (screenWidth < 768) { // md breakpoint in tailwind
@@ -28,19 +29,7 @@ export class DashboardPage implements OnInit {
   }
 
 ngOnInit() {
-  const storedTheme = localStorage.getItem('theme');
-  if (storedTheme === 'dark') {
-    this.document.body.classList.add('dark');
-  } else if (storedTheme === 'light') {
-    this.document.body.classList.remove('dark');
-  } else {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark) {
-      this.document.body.classList.add('dark');
-    } else {
-      this.document.body.classList.remove('dark');
-    }
-  }
+
 }
 
 
@@ -82,64 +71,10 @@ ngOnInit() {
     }
   }
 
-// set theme
-async presentActionSheet() {
-  const actionSheet = await this.actionSheetController.create({
-    header: 'Select Theme',
-    buttons: [
-      {
-        text: 'Light Theme',
-        icon: 'sunny', // Ionic icon for sun
-        handler: () => {
-          this.setTheme('light');
-        },
-      },
-      {
-        text: 'Dark Theme',
-        icon: 'moon', // Ionic icon for moon
-        handler: () => {
-          this.setTheme('dark');
-        },
-      },
-      {
-        text: 'System Default',
-        icon: 'cog', // Ionic icon for cogwheel
-        handler: () => {
-          this.setTheme('system');
-        },
-      },
-      {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-      },
-    ],
-  });
-  await actionSheet.present();
-}
 
-setTheme(theme: 'dark' | 'light' | 'system') {
-  switch (theme) {
-    case 'dark':
-      this.document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark'); // Store user preference
-      break;
-    case 'light':
-      this.document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light'); // Store user preference
-      break;
-    case 'system':
-      localStorage.removeItem('theme'); // Clear stored preference
-      // Adapt to system theme
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark) {
-        this.document.body.classList.add('dark');
-      } else {
-        this.document.body.classList.remove('dark');
-      }
-      break;
+  showThemeSelector() {
+    this.themeService.showThemeSelector();
   }
-}
 
   toggleAsideMenu() { // new method
     this.isMenuHidden = !this.isMenuHidden;
@@ -173,4 +108,18 @@ setTheme(theme: 'dark' | 'light' | 'system') {
   navigateToCalendar() {
     this.router.navigateByUrl('/dashboard/Calendar');
   }
+  navigateToUniRide() {
+    this.router.navigateByUrl('/dashboard/UniRide');
+  }
+
+  logout() {
+    // Remove tokens and user info from localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('idLogin');
+
+    // Navigate to login page
+    this.router.navigate(['/login']);
+  }
+
 }

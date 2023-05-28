@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserUniService } from '../../services/user-uni.service';
 import { ToastController } from '@ionic/angular';
 @Component({
@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class NewPasswordPage implements OnInit {
   formNewPass: FormGroup;
-  constructor(private router: Router, public toastController: ToastController, private builder:FormBuilder, private useruniService: UserUniService,private jwtHelper:JwtHelperService) {
+  constructor(private activateroute: ActivatedRoute,private router: Router, public toastController: ToastController, private builder:FormBuilder, private useruniService: UserUniService,private jwtHelper:JwtHelperService) {
     this.formNewPass= this.builder.group({
       password:['']
     })
@@ -62,15 +62,27 @@ export class NewPasswordPage implements OnInit {
 
   ngOnInit() {
     // ngOnInit logic
+
+    console.log( this.activateroute.snapshot.params['token']);
   }
   // Function to toggle password visibility
   togglePasswordVisibility() {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
-  changePassword(){
+  Reset(){
+    this.checkPasswords()
     this.formNewPass= this.builder.group({
-      password:[this.pass1]
+      token:[this.activateroute.snapshot.params['token']],
+      newPassword:[this.pass1],
+      confirmedPassword:[this.pass2]
+    })
+    this.useruniService.newPasswordService(this.formNewPass.value).subscribe(res=>{
+
+      this.presentToast('Password Reset Successfully').then(()=>{
+        this.goToLoginPage();
+      });
+
     })
   }
 

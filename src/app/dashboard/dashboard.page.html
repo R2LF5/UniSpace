@@ -84,7 +84,7 @@
             </li>
             <hr>
             <li>
-              <button (click)="presentActionSheet()" ion-button class="block px-4 py-2 font-bold w-full h-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Switch Appearance</button>
+              <button (click)="showThemeSelector()" ion-button class="block px-4 py-2 font-bold w-full h-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Switch Appearance</button>
             </li>
             <hr>
             <li>
@@ -92,7 +92,7 @@
             </li>
             <hr>
             <li>
-              <button ion-button class="block px-4 py-2 font-bold w-full h-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button>
+              <button ion-button (click)="logout()" class="block px-4 py-2 font-bold w-full h-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button>
             </li>
           </ul>
       </div>
@@ -153,19 +153,19 @@
 
   <div class="fixed bottom-0 left-0 sm:hidden z-50 w-screen h-16 bg-white border-t-2 border-gray-200 dark:bg-purp rounded-t-3xl ">
     <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <button (click)="navigateToUniNews()" type="button" class="inline-flex flex-col items-center rounded-tl-3xl justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <ion-icon name="newspaper-outline" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
             <span class="text-sm text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white">UniNews</span>
         </button>
-        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <button (click)="navigateToUniRide()" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
           <ion-icon name="car" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
           <span class="text-sm text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white">UniRide</span>
         </button>
-        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <button type="button" (click)="navigateToEventLink()" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
           <ion-icon name="Link" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
           <span class="text-sm text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white">EventLink</span>
         </button>
-        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <button type="button" (click)="navigateToCourseMate()" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
           <ion-icon name="school" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
           <span class="text-sm text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white">CourseMate</span>
         </button>
@@ -173,7 +173,7 @@
 
     </div>
     <div class="absolute bottom-10 flex justify-center items-center w-screen">
-      <div class="w-16 h-16 dark:bg-white bg-gray-400 rounded-full flex items-center justify-center">
+      <div (click)="navigateToCalendar()" class="w-16 h-16 dark:bg-white bg-gray-400 rounded-full flex items-center justify-center">
       <button title="calendar" class="w-14 h-14 bg-white  dark:bg-black rounded-full z-10 scale-110 flex items-center justify-center" title="">
         <ion-icon name="calendar" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
       </button>
@@ -183,7 +183,7 @@
 </div>
 
 <main class="h-screen z-10 relative  lg:left-80 lg:mr-80 left-0 mr-0">
-  <router-outlet ></router-outlet>
+  <router-outlet class=""></router-outlet>
 </main>
 </ion-content>
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, PopoverController } from '@ionic/angular';
+import { UserUniService } from '../services/user-uni.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,27 @@ import { AlertController, PopoverController } from '@ionic/angular';
   styleUrls: ['./admin.page.scss']
 })
 export class AdminPage implements OnInit {
-  constructor(public alertController: AlertController, public popoverController: PopoverController) {}
+  constructor(
+    public alertController: AlertController,
+    public popoverController: PopoverController,
+    private userUniService: UserUniService
+  ) {}
+
+  users: User[] = [];
 
   ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.userUniService.getAllUsers().subscribe(
+      (users: User[]) => {
+        this.users = users;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   // LEAVE BUTTON

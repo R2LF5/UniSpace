@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { SetupProfilePageRoutingModule } from './setup-profile-routing.module';
 
 import { SetupProfilePage } from './setup-profile.page';
+import {  NoSpecialCharsDirective} from '../../directive/no-special-chars.directive';
+import { NumberOnlyDirective } from '../../directive/number-only.directive';
+
 
 @NgModule({
   imports: [
@@ -15,6 +18,6 @@ import { SetupProfilePage } from './setup-profile.page';
     IonicModule,
     SetupProfilePageRoutingModule
   ],
-  declarations: [SetupProfilePage]
+  declarations: [SetupProfilePage, NoSpecialCharsDirective, NumberOnlyDirective]
 })
 export class SetupProfilePageModule {}

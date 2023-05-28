@@ -44,4 +44,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
+.leaflet-routing-container {
+  display: none !important;
+}
+
 

@@ -131,7 +131,7 @@ const routes: Routes = [
     loadChildren: () => import('./login/reset-code/reset-code.module').then( m => m.ResetCodePageModule)
   },
   {
-    path: 'reset',
+    path: 'reset/:token',
     loadChildren: () => import('./login/new-password/new-password.module').then( m => m.NewPasswordPageModule)
   },
 ];

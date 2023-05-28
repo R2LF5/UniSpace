@@ -23,60 +23,97 @@
     <button ion-button >
     <h1 class="title"><span class="uni">Uni</span><span class="space">Space</span></h1>
     </button>
-    <!-- LOGIN FORM -->
+    <!-- UPATE FORM -->
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class=" py-8 px-4 sm:shadow-xl shadow-none sm:rounded-lg sm:px-10">
     <form class="space-y-6" action="#" method="POST">
-      
+
       <div class="flex justify-center mt-8 relative">
         <div class="relative">
           <img [src]="imageSrc || 'https://tecdn.b-cdn.net/img/new/avatars/2.webp'" class="w-32 rounded-full mx-auto mb-[-2px]" alt="Avatar" />
           <div style="width: 30px; height: 30px; border-radius: 50%; background-color: rgb(156, 154, 154); display: flex; justify-content: center; align-items: center; position: absolute; bottom: 0; right: 0; transform: translate(6%, 6%);">
-            <button (click)="uploadImage()">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-              </svg>
+            <button type="button" title="addimage" (click)="uploadImage()" class="items-center justify-center ">
+              <ion-icon name="camera-outline" class="flex items center justify-center w-5 h-5"></ion-icon>
             </button>
           </div>
         </div>
       </div>
-      
-      
+
+
       <hr class="border-orange-500 my-0">
           <div class="w-full">
-            <div class="relative h-12 w-full ">
-              <input title="First Name" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" placeholder=" " type="First Name" />
-              <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-900 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-900 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-purp peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-purp peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-purp peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                First Name
-              </label>
+            <div>
+              <div class="w-full">
+                <div class="relative h-12 w-full min-w-[200px]">
+                  <input
+                  [(ngModel)]="firstName"
+                  [ngModelOptions]="{ standalone: true }"
+                  #firstNameInput
+                  (blur)="capitalizeInputValue(firstNameInput)"
+                  (ngModelChange)="onFirstNameChange($event)"
+                  appNoSpecialChars
+                  title="firstName"
+                  class=" peer h-full w-full rounded-[7px] focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp "
+                  placeholder="First Name "
+                  type="text" />
+
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="w-full">
-            <div class="relative h-12 w-full ">
-              <input title="Last Name" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" placeholder=" " type="Last Name" />
-              <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-900 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-900 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-purp peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-purp peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-purp peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                Last Name
-              </label>
+            <div>
+              <div class="w-full">
+                <div class="relative h-12 w-full min-w-[200px]">
+                  <input
+                  [(ngModel)]="lastName"
+                  [ngModelOptions]="{ standalone: true }"
+                  #lastNameInput
+                  (blur)="capitalizeInputValue(lastNameInput)"
+                  (ngModelChange)="onLastNameChange($event)"
+                  appNoSpecialChars
+                  title="lastName"
+                  class=" peer h-full w-full rounded-[7px] focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp "
+                  placeholder="Last Name "
+                  type="text" />
+
+                </div>
+              </div>
             </div>
           </div>
-          
-      <div>
-        <div class="w-full">
-          <div class="relative h-12 w-full min-w-[200px]">
-            <input title="Phone Number" class="peer h-full w-full rounded-[7px] focus:shadow-md border-4 border-Space dark:border-gray-400 border-t-4 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-purp focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" placeholder=" " type="number"/>
-            <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-900 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-900 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-purp peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-purp peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-purp peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-              Phone Number
-            </label>
+
+          <div class="w-full">
+            <div>
+              <div class="w-full">
+                <div class="relative h-12 w-full min-w-[200px]">
+                  <input
+                    appNumberOnly
+                    [(ngModel)]="phoneNumber"
+                    [ngModelOptions]="{standalone: true}"
+                    id="phoneNumberInput"
+                    title="phoneNumber"
+                    class="peer h-full w-full rounded-[7px] focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp"
+                    placeholder="Phone Number"
+                    type="text"
+                    (blur)="validatePhoneNumber()"
+                    (unformattedInput)="handleUnformattedInput($event)"
+                  />
+
+                  <div class="border-red-500 hidden"></div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <ion-toggle class="w-full items-center" color="secondary">keep my number private</ion-toggle><br /><br /> 
+
+
+
+
+      <ion-toggle class="w-full items-center" color="secondary">keep my number private</ion-toggle><br /><br />
       <div>
-        <ion-button type="submit" color="secondary" class="w mt-6 w-full text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l">Next</ion-button>
+        <ion-button (click)="update()" type="submit" color="secondary" class="w mt-6 w-full text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l">Next</ion-button>
       </div>
-      
+
 
     </form>
   </div>

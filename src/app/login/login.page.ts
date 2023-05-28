@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
       password:['']
     })
   }
- 
+
   goToForgotPasswordPage() {
     this.router.navigateByUrl('/forgotPassword');
   }
@@ -44,23 +44,36 @@ export class LoginPage implements OnInit {
 
 
 
-
   login(){
-   this.formLogin= this.builder.group({
+    this.formLogin= this.builder.group({
       email: [this.email],
       password:[this.password]
     })
-    console.log(this.formLogin.value)
     this.useruniService.loginService(this.formLogin.value).subscribe(res=>{
       localStorage.setItem('token',res.token);
       localStorage.setItem('role',this.jwtHelper.decodeToken(res.token).role);
-      localStorage.setItem('idLogin',this.jwtHelper.decodeToken(res.token).id);
-      this.router.navigate(['/dashboard'])
+      const id = this.jwtHelper.decodeToken(res.token).id;
+      localStorage.setItem('idLogin', id);
+
+      // Check if it's the first login
+      if (res.firstLogin) {
+        // If it's the first login, navigate to the dashboard
+        this.router.navigate(['/dashboard']);
+      } else {
+        // If it's not the first login, fetch the user's details
+        this.useruniService.findUserById(id).subscribe(user => {
+          // Store the first name and last name in local storage
+          localStorage.setItem('firstName', user.firstName);
+          localStorage.setItem('lastName', user.lastName);
+
+          // Navigate to the setup page
+          this.router.navigate(['/setup']);
+        });
+      }
 
       console.log(res);
-
     })
-
   }
+
 
 }

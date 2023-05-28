@@ -5,24 +5,25 @@ declare let navigator: any;
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-uniride',
   templateUrl: './uniride.page.html',
   styleUrls: ['./uniride.page.scss'],
 })
 export class UniridePage implements OnInit, AfterViewInit {
-  departureLocation = '';
-  destinationLocation = '';
+
   @ViewChild('map') mapContainer: any;
   map: any;
   distance:  number = 0;
-  departureLocations: string[] = [];
-  arrivalLocations: string[] = [];
+
 
   constructor(private alertController: AlertController, private router: Router) {}
 
 
-
+  routingOptions: any;
+  routingControl: any;
 
 
   ngOnInit() {}
@@ -81,23 +82,26 @@ export class UniridePage implements OnInit, AfterViewInit {
       }, 0);
     });
       // Remove the directions control
-      this.map.removeControl(this.map['osrmControl']); // Remove the OpenRouteService control
+      if (this.map['osrmControl']) {
+        this.map.removeControl(this.map['osrmControl']);
+      }
+
 
 
     // Define routing options
-    const routingOptions = {
+    this.routingOptions = {
       waypoints: [
         L.latLng(36.833356, 10.147994), //depart
         L.latLng(36.8122548,10.1017097) //destination
       ],
       routeWhileDragging: true,
-      show: false
+      show: false,
     };
 
     // Create the routing control and add it to the map
-    const routingControl = L.Routing.control(routingOptions).addTo(this.map);
+    this.routingControl = L.Routing.control(this.routingOptions).addTo(this.map);
 
-    routingControl.on('route', (e) => {
+    this.routingControl.on('route', (e: any) => {
       const route = e.route;
       this.distance = route.totalDistance;
     });
@@ -108,32 +112,123 @@ export class UniridePage implements OnInit, AfterViewInit {
   async centerToCurrentLocation() {
     console.log('Getting current position...');
     if (navigator.geolocation) {
+      // Check for geolocation permission
+      const permissionStatus = await navigator.permissions.query({ name: 'geolocation' });
+      if (permissionStatus.state === 'denied') {
+        console.error('Geolocation permission was previously denied.');
+        const alert = await this.alertController.create({
+          header: 'Error',
+          message: 'Geolocation permission was previously denied. Please enable it in your browser settings.',
+          buttons: ['OK']
+        });
+        await alert.present();
+        return;
+      }
+
       navigator.geolocation.getCurrentPosition(
         async (position: GeolocationPosition) => {
           console.log('Current position retrieved:', position);
           const { latitude, longitude } = position.coords;
           this.map.setView([latitude, longitude], 17);
-          await this.showCoordinatesAlert(latitude, longitude);
+
         },
-        (error: GeolocationPositionError) => {
+        async (error: GeolocationPositionError) => {
           console.error('Error getting current position:', error);
+          const alert = await this.alertController.create({
+            header: 'Error',
+            message: `Could not get current position: ${error.message}`,
+            buttons: ['OK']
+          });
+          await alert.present();
         },
         { enableHighAccuracy: true }
       );
     } else {
       console.error('Geolocation is not supported by this browser.');
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Geolocation is not supported by this browser.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
+  }
+  setLocationToCurrent(title: string) {
+    navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
+      const { latitude, longitude } = position.coords;
+      if (title === 'depCurrent') {
+        this.routingOptions.waypoints[0] = L.latLng(latitude, longitude);
+        // Update the search bar value
+        const searchBar = document.getElementById('departSearchbar') as HTMLInputElement;
+        if (searchBar) {
+          searchBar.value = 'Current Location';
+        }
+      } else if (title === 'arrCurrent') {
+        this.routingOptions.waypoints[1] = L.latLng(latitude, longitude);
+        // Update the search bar value
+        const searchBar = document.getElementById('arrivalSearchbar') as HTMLInputElement;
+        if (searchBar) {
+          searchBar.value = 'Current Location';
+        }
+      }
+      // Refresh the route
+      this.refreshRoute();
+    });
+    console.log('Setting location to current for ', title);
+  }
+
+  setLocationToFST(title: string) {
+    const latitude = 36.833356;
+    const longitude = 10.147994;
+    if (title === 'depFST') {
+      this.routingOptions.waypoints[0] = L.latLng(latitude, longitude);
+      // Update the search bar value
+      const searchBar = document.getElementById('departSearchbar') as HTMLInputElement;
+      if (searchBar) {
+        searchBar.value = 'FST';
+      }
+    } else if (title === 'arrFST') {
+      this.routingOptions.waypoints[1] = L.latLng(latitude, longitude);
+      // Update the search bar value
+      const searchBar = document.getElementById('arrivalSearchbar') as HTMLInputElement;
+      if (searchBar) {
+        searchBar.value = 'FST';
+      }
+    }
+    // Refresh the route
+    this.refreshRoute();
+  }
+  onSearchChange(event: any, type: string) {
+    const value = event.detail.value;
+    const coordinates = value.split(',').map((coord: string) => parseFloat(coord.trim()));
+
+    // Check if the input is valid coordinates
+    if (coordinates.length === 2 && !isNaN(coordinates[0]) && !isNaN(coordinates[1])) {
+      if (type === 'depart') {
+        this.routingOptions.waypoints[0] = L.latLng(coordinates[0], coordinates[1]);
+      } else if (type === 'arrival') {
+        this.routingOptions.waypoints[1] = L.latLng(coordinates[0], coordinates[1]);
+      } 
+      // Refresh the route
+      this.refreshRoute();
     }
   }
 
-  async showCoordinatesAlert(latitude: number, longitude: number) {
-    const alert = await this.alertController.create({
-      header: 'Current Coordinates',
-      message: `Latitude: ${latitude}<br>Longitude: ${longitude}`,
-      buttons: ['OK']
-    });
 
-    await alert.present();
+  refreshRoute() {
+    // Remove the existing routing control
+    if (this.routingControl) {
+      this.map.removeControl(this.routingControl);
+    }
+    // Create a new routing control with the updated waypoints
+    this.routingControl = L.Routing.control(this.routingOptions).addTo(this.map);
+    this.routingControl.on('route', (e: any) => {
+      const route = e.route;
+      this.distance = route.totalDistance;
+    });
   }
+
+
 
 
   ngAfterViewChecked() {
