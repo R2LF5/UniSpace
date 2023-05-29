@@ -17,6 +17,7 @@ export class UniNewsPage implements OnInit {
   updateForm: FormGroup;
   eventForm: FormGroup;
   assignmentForm: FormGroup;
+  userRole: string = '';
 
   constructor(
     private toastController: ToastController,
@@ -24,7 +25,9 @@ export class UniNewsPage implements OnInit {
     private router: Router,
     private actionSheetController: ActionSheetController,
     private formBuilder: FormBuilder
+
   ) {
+    this.userRole = localStorage.getItem('role') || '';
     this.updateForm = this.formBuilder.group({
       description:[''],
       timestamp: [''],
@@ -89,7 +92,7 @@ export class UniNewsPage implements OnInit {
             id:localStorage.getItem('idLogin'),
             role:role
             // how do i test bech naaref eli it got sent b shih ?
-            
+
         }
 
         });

@@ -9,6 +9,8 @@ import { InboxPage } from './features/inbox/inbox.page';
 import { ProfilePage } from './profile/profile.page';
 import { MyCalanderPage } from './my-calander/my-calander.page';
 import { CoursePage } from './features/course-mate/course/course.page';
+import { AdminPageModule } from './admin/admin.module';
+import { AdminPage } from './admin/admin.page';
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -22,6 +24,7 @@ const routes: Routes = [
       { path: 'Inbox', component: InboxPage },
       { path: 'Profile', component: ProfilePage },
       { path: 'Calendar', component:MyCalanderPage},
+      { path: 'admin', component:AdminPage},
       { path: '', redirectTo: 'UniNews', pathMatch: 'full' }, // default child route
     ]
   },

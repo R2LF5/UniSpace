@@ -3,7 +3,12 @@
   <div class="ml-5 mr-5 ">
     <!-- post template -->
 
-      <div class="container flex flex-col w-full max-w-lg 5 p- mx-auto divide-y rounded-2xl shadow-xl divide-gray-700 bg-gray-100 z-50 dark:bg-slate-950  dark:border-2 border-purp mt-4 mb-6">
+      <div class="container flex flex-col w-full max-w-lg 5 p- mx-auto  rounded-2xl shadow-xl divide-gray-700 bg-gray-100 z-50 dark:bg-black  dark:border-2 border-purp mt-4 mb-6"
+      [ngClass]="{
+        'cursor-not-allowed': userRole === 'student',
+
+
+      }">
       <div class="flex justify-between p-4">
         <div class="flex space-x-4">
           <div>
@@ -19,6 +24,7 @@
           cols="30"
           spellcheck="false"
           [(ngModel)]="descUpdate"
+          [disabled]="userRole === 'student'"
           maxlength="255"
           ></textarea>
           <div class="text-right text-xs text-gray-500 ">
@@ -30,12 +36,55 @@
         </div>
         <div class=" "  >
             <!-- submit button -->
-            <ion-button (click)="submitUpdate()" shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline" >Post</ion-button>
+            <ion-button (click)="submitUpdate()" shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline"     [disabled]="userRole === 'student'">Post</ion-button>
 
 
 
         </div>
       </div>
+
+
+
+         <!-- post type -->
+         <div class=" space-y-8 text-sm text-white" *ngIf="userRole !== 'student'" >
+          <div class="grid  grid-cols-4 text-black dark:text-white h-full w-full" >
+            <button
+
+              [disabled]="userRole === 'student'"
+              [ngClass]="{'bg-gray-200 dark:bg-gray-900': updateSelected}"
+              (click)="selectUpdate()"
+              class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-bl-2xl  dark:block w-full h-16"
+            >
+              Update
+            </button>
+            <button
+              [disabled]="userRole === 'student' || userRole === 'clubPresident'"
+              [ngClass]="{'bg-gray-200 dark:bg-gray-900':assignmentSelected}"
+              (click)="selectAssignment()"
+              class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16"
+            >
+              Assignment
+            </button>
+            <button
+              [disabled]="userRole === 'student' || userRole === 'clubPresident'"
+              [ngClass]="{'bg-gray-200 dark:bg-gray-900':assignmentSelected}"
+              (click)="selectAssignment()"
+              class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16"
+            >
+              Course Material
+            </button>
+            <button
+              [disabled]="userRole === 'student' || userRole === 'professor' "
+              [ngClass]="{'bg-gray-200 dark:bg-gray-900':eventSelected}"
+              (click)="selectEvent()"
+              class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-br-2xl  dark:block w-full h-16"
+            >
+              Event
+            </button>
+          </div>
+
+        </div>
+
       <div class=" space-y-8 text-sm text-white">
 
 
@@ -46,14 +95,14 @@
           <form [formGroup]="eventForm">
           <!-- forum stuff -->
           <!-- Text Area for Description -->
-          <ion-item style="--background: #F7FAFC">
+          <ion-item >
             <ion-label position="stacked">Description</ion-label>
             <ion-textarea formControlName="description"></ion-textarea>
           </ion-item>
 
 
           <!-- Calendar Input for Event Date and Time -->
-          <ion-item style="--background: #F7FAFC">
+          <ion-item >
               <ion-label position="stacked">Date and Time</ion-label>
               <div class="w-full flex justify-center items-center">
               <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios"></ion-datetime>
@@ -61,7 +110,7 @@
           </ion-item>
 
           <!-- Select Input for Department -->
-          <ion-item style="--background: #F7FAFC">
+          <ion-item >
             <ion-label position="stacked">Department</ion-label>
             <ion-select formControlName="department" [disabled]="eventForm.controls['allDepartments'].value">
                 <ion-select-option value="dept1">Department 1</ion-select-option>
@@ -75,7 +124,7 @@
         </ion-item>
 
         <!-- Toggle for All Departments -->
-        <ion-item style="--background: #F7FAFC">
+        <ion-item >
             <ion-label>All Departments</ion-label>
             <ion-toggle formControlName="allDepartments" color="secondary"></ion-toggle>
         </ion-item>
@@ -119,21 +168,21 @@
           <form [formGroup]="assignmentForm">
             <!-- forum stuff -->
           <!-- Text Area for Description -->
-          <ion-item style="--background: #F7FAFC">
+          <ion-item >
             <ion-label position="stacked">Description</ion-label>
             <ion-textarea formControlName="description"></ion-textarea>
           </ion-item>
 
 
           <!-- Calendar Input for Event Date and Time -->
-          <ion-item style="--background: #F7FAFC">
+          <ion-item >
               <ion-label position="stacked">Date and Time</ion-label>
               <div class="w-full flex justify-center items-center">
               <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios"></ion-datetime>
               </div>
           </ion-item>
 <!-- Select Input for Section -->
-<ion-item style="--background: #F7FAFC">
+<ion-item >
   <ion-label position="stacked">Section</ion-label>
   <ion-select formControlName="section">
     <ion-select-option value="dept1">Section 1</ion-select-option>
@@ -144,7 +193,7 @@
 </ion-item>
 
 <!-- Select Input for Course -->
-<ion-item style="--background: #F7FAFC">
+<ion-item >
   <ion-label position="stacked">Course Name</ion-label>
   <ion-select formControlName="course">
     <ion-select-option value="dept1">1</ion-select-option>
@@ -183,23 +232,6 @@
 
           </form>
         </div>
-      </div>
-      <!-- post type -->
-      <div class=" space-y-8 text-sm text-white">
-        <div class="grid grid-cols-4 text-black dark:text-white h-full">
-          <button [class.bg-gray-200]="updateSelected" (click)="selectUpdate()" class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-bl-2xl  dark:block w-full h-16">
-            Update
-          </button>
-          <button [class.bg-gray-200]="assignmentSelected" (click)="selectAssignment()" class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16">
-            Assignment
-          </button><button [class.bg-gray-200]="assignmentSelected" (click)="selectAssignment()" class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16">
-            Course
-          </button>
-          <button [class.bg-gray-200]="eventSelected" (click)="selectEvent()" class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-br-2xl  dark:block w-full h-16">
-            Event
-          </button>
-        </div>
-
       </div>
 
     </div>
@@ -246,5 +278,7 @@
 
 
   </div>
+<div class="h-20 lg:hidden md:hidden block">
 
+</div>
 

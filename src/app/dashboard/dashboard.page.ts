@@ -27,10 +27,13 @@ export class DashboardPage implements OnInit {
       this.isMenuHidden = true;
     }
   }
+  userRole: string = '';
 
-ngOnInit() {
+  ngOnInit() {
+    this.userRole = localStorage.getItem('role') || '';
 
-}
+
+  }
 
 
   onFileSelected(event: any) {
@@ -110,6 +113,9 @@ ngOnInit() {
   }
   navigateToUniRide() {
     this.router.navigateByUrl('/dashboard/UniRide');
+  }
+  navigateToAdmin(){
+    this.router.navigateByUrl('/dashboard/admin');
   }
 
   logout() {

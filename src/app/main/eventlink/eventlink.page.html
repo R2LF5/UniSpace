@@ -143,8 +143,8 @@
         </button>
       </div>
     <!-- MAIN STUFF  -->
-    <aside class="   z-10   mt-4 " >
-      <div class="ml-6 mr-6 z-10 relative overflow-hidden rounded-lg bg-cover bg-no-repeat p-12 text-center" style="background-image: url('https://mdbootstrap.com/img/new/standard/nature/051.jpg'); height: 350px">
+    <aside class="   z-10   md:mt-4 mt-0 " >
+      <div class="md:ml-6 md:mr-6 ml-0 mr-0 z-10 relative overflow-hidden sm:rounded-3xl rounded-b-3xl bg-cover bg-no-repeat p-12  text-center" style="background-image: url('https://mdbootstrap.com/img/new/standard/nature/051.jpg'); height: 350px">
         <div class="">
           <ion-button class="login-button ml-12 "
                       color="secondary"
@@ -153,15 +153,16 @@
           </ion-button>
         </div>
       <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.6)">
-        <div class="flex h-full items-center justify-center">
+        <div class="flex h-full w-full items-center justify-center">
           <div class="text-white ">
-            <h4 class="mb-4 text-3xl font-sans ml-8">Hurry Up!Battle Start Soon</h4>
-            <h2 class="mb-4 text-4xl font-semibold ml-8" >Eventer Music Festival</h2>
-            <h3 class="mb-4 text-sm font-sans  ml-8">April 14-17-2023 | Info Club | Faculty Of Tunisia</h3>
+            <h4 class="mb-4 md:text-3xl sm:text-xl font-sans ml-0 md:ml-8">Don't Miss</h4>
+            <h2 class="mb-4 sm:text-4xl text-2xl font-semibold ml-0 md:ml-8" >Eventer Music Festival</h2>
             <ion-button class="flex justify-center mt-10 px-28  " color="secondary" >
               <span class="boo">More details</span>
             </ion-button>
-            <div class="flex justify-center items-center  ml-8 mt-2 font-sans ">
+            <h3 class="mb-4 text-sm font-sans  ">April 14-17-2023 | Info Club | Faculty Of Sciences Tunisia</h3>
+
+            <div class="flex justify-center items-center  ml-8 mt-2 font-sans sm:scale-100 scale-75">
               <div class=" text-white  font-semibold text-xl p-4 rounded-md mr-2">
                 <div class="text-2xl " id="days">01</div>
                 <div class="text-xl">Days</div>
@@ -198,8 +199,8 @@
 
 
             <button (click)="toggleMenu()">
-            <ion-card class="mb-6 hover:scale-105 transition duration-300 ease-in-out ml-4 ">
-              <img alt="Silhouette of mountains" src="../../../assets/R.jpg" />
+            <ion-card class="mb-6 hover:scale-105 rounded-2xl  transition duration-300 ease-in-out ml-4 ">
+              <img alt="" class="overflow-clip h-32" src="../../../assets/R.jpg" />
               <div class="">
                 <ion-icon name="heart" class="absolute top-2 right-2 text-orange-500 font-bold mr-16 w-7 h-7 "></ion-icon>
                 <ion-icon name="log-out-outline" class="absolute top-2 right-2 text-red-500 font-bold w-7 h-7"></ion-icon>

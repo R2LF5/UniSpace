@@ -13,8 +13,13 @@ export class ProfilePage implements OnInit {
   bioText: string = 'An artist of considerable range, Jenna the name taken by Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.';
   showFullBio: boolean = false;
   screenWidth: number = 0;
+  firstName: string='';
+  lastName: string='';
 
-  constructor(private router: Router, private clipboard: Clipboard, private toastController: ToastController) {}
+  constructor(private router: Router, private clipboard: Clipboard, private toastController: ToastController) {
+    this.firstName = localStorage.getItem('firstName') || '';
+    this.lastName = localStorage.getItem('lastName') || '';
+  }
 
   goToForgotPasswordPage() {
     this.router.navigateByUrl('/forgot-password');

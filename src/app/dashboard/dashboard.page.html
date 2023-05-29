@@ -11,7 +11,7 @@
         <h1 class="title w-40 flex justify-start items-start ml-4"><span class="uni">Uni</span><span class="space">Space</span></h1>
       </button>
       <nav>
-      <ul class="space-y-1">
+      <ul class="space-y-1 pt-9">
         <li>
           <button  (click)="navigateToUniNews()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space  dark:text-white w-full py-4 px-5">
             <svg class="mr-4 w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
@@ -38,15 +38,24 @@
           </button>
           <hr>
         </li>
-        <li>
-          <button (click)="navigateToInbox()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space  dark:text-white w-full py-4 px-5">
-            <svg class=" mr-4 h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-            </svg>Messages
-          </button>
-          <hr>
-        </li>
-        <li>
+
+          <li>
+            <button  type="button" (click)="navigateToUniRide()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space dark:text-white  w-full py-4 px-5">
+
+              <ion-icon  class=" mr-4 h-8 w-8" name="car-outline"></ion-icon>
+              UniRide
+            </button>
+            <hr>
+          </li>
+          <li>
+            <button (click)="navigateToInbox()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space  dark:text-white w-full py-4 px-5">
+              <svg class=" mr-4 h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+              </svg>Messages
+            </button>
+            <hr>
+          </li>
+        <!-- <li>
           <button  type="button" (click)="showSecondAside = true; isAsideHidden = true" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space dark:text-white  w-full py-4 px-5">
             <svg class=" mr-4 h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -54,13 +63,23 @@
             Add Event
           </button>
           <hr>
-        </li>
+        </li> -->
+
+
         <li>
           <button (click)="navigateToProfile()"  class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space dark:text-white  w-full py-4 px-5">
             <svg class=" mr-4 h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             Profile
+          </button>
+          <hr>
+        </li>
+        <li>
+          <button  *ngIf="userRole === 'Admin'" type="button" (click)="navigateToAdmin()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space dark:text-white  w-full py-4 px-5">
+
+            <ion-icon  class=" mr-4 h-8 w-8" name="settings-outline"></ion-icon>
+            Admin Panel
           </button>
           <hr>
         </li>
@@ -99,7 +118,7 @@
     </div>
   </aside>
   <!-- ionic button with ionic menu filled icon inside -->
-  <button title="menu" ion-button menuToggle id="menu-toggle" class="absolute z-50 top-20 left-3 scale-150 sm:block hidden lg:hidden" type="button" (click)="toggleAsideMenu()">
+  <button title="menu" ion-button menuToggle id="menu-toggle" class="absolute z-50 top-24 left-11 scale-150 sm:block hidden lg:hidden" type="button" (click)="toggleAsideMenu()">
     <ion-icon name="list" class="scale-150"></ion-icon>
   </button>
 
@@ -148,11 +167,11 @@
         </div>
       </div>
       <button type="submit" class="text-white justify-center flex items-center bg-orange-500  w-80  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg> Create Event</button>
-   </form>
+    </form>
   </aside>
-
-  <div class="fixed bottom-0 left-0 sm:hidden z-50 w-screen h-16 bg-white border-t-2 border-gray-200 dark:bg-purp rounded-t-3xl ">
-    <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+  <div class="w-screen">
+  <div class="fixed  bottom-0 left-0 right-0 sm:hidden z-50 w-full h-16 bg-white border-t-2 border-gray-200 dark:bg-purp rounded-t-3xl ">
+    <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium ">
         <button (click)="navigateToUniNews()" type="button" class="inline-flex flex-col items-center rounded-tl-3xl justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <ion-icon name="newspaper-outline" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
             <span class="text-sm text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white">UniNews</span>
@@ -172,7 +191,7 @@
 
 
     </div>
-    <div class="absolute bottom-10 flex justify-center items-center w-screen">
+    <div class="relative bottom-24 flex justify-center items-center w-screen">
       <div (click)="navigateToCalendar()" class="w-16 h-16 dark:bg-white bg-gray-400 rounded-full flex items-center justify-center">
       <button title="calendar" class="w-14 h-14 bg-white  dark:bg-black rounded-full z-10 scale-110 flex items-center justify-center" title="">
         <ion-icon name="calendar" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
@@ -180,9 +199,10 @@
       </div>
     </div>
   </div>
+  </div>
 </div>
 
-<main class="h-screen z-10 relative  lg:left-80 lg:mr-80 left-0 mr-0">
+<main class="h-screen z-10 relative bottom-0 sm:h  lg:left-80 lg:mr-80 left-0 mr-0">
   <router-outlet class=""></router-outlet>
 </main>
 </ion-content>

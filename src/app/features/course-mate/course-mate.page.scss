@@ -1,0 +1,28 @@
+/* styles.css or global.scss file */
+.ion-content{
+  background-color: aqua;
+}
+/* Mobile view: full width */
+ion-alert .alert-wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (min-width: 768px) {
+  ion-alert .alert-wrapper {
+    width: 70%; /* or any desired width */
+    max-width: 70%;
+  }
+}
+.add{
+    --background: #ffffff;
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (min-width: 992px) {
+  ion-alert .alert-wrapper {
+    width: 50%; /* or any desired width */
+    max-width: 50%;
+  }
+}

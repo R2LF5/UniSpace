@@ -6,26 +6,238 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="">
+<ion-content class="bg-black">
+  <!-- ionic circular add button -->
+  <ion-fab class="fixed sm:bottom-10 sm:right-10 bottom-20 right-5 " >
+    <ion-fab-button id="addclass" class="add" (click)="toggleMenu()" >
+      <ion-icon name="add" class="text-black w-7 h-7"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+  <!-- LG blob -->
+  <div class="hidden" id="menu" [ngClass]="{ 'hidden': isMenuHidden }">
+    <div class="fixed sm:hidden hidden  md:block bg-white dark:bg-black lg:w-1/3 md:w-2/4 z-50 lg:right-10 lg:top-52 bottom-10 md:top-56 md:right-10   overflow-scroll rounded-2xl shadow-2xl ">
+
+
+      <div>
+        <!-- Input Text -->
+        <div class="w-full pt-16 pb-10">
+          <div class="relative h-12 w-full pl-10 pr-10 min-w-[200px]">
+            <input
+
+
+            title="Course"
+            class=" peer h-full w-full rounded-xl focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp "
+            placeholder="Course Name "
+            type="text"
+            maxlength="255" />
+
+          </div>
+        </div>
+
+      <div class="pl-10 pr-10 ">
+        <div class="relative w-ful h-full max-h-56 shadow-xl  rounded-t-3xl bg-purp overflow-auto">
+          <ion-radio-group>
+          <div class="grid grid-cols-1 divide-y-2 content-center h-full overflow-auto w-full">
+
+
+
+            <div class="h-full w-full content-center">
+              <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+                <ion-label>GLSI</ion-label>
+                <ion-radio slot="start" color="light" value="1"></ion-radio>
+              </div>
+            </div>
+
+            <div class="h-full w-full content-center">
+              <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+                <ion-label>IOT</ion-label>
+                <ion-radio slot="start" color="light" value="2"></ion-radio>
+              </div>
+            </div>
+
+
+
+          </div>
+        </ion-radio-group>
+        </div>
+
+
+
+        <div class="relative w-ful h-full max-h-56 shadow-xl border-t-2  rounded-b-3xl bg-purp overflow-auto">
+          <ion-radio-group>
+          <div class="grid grid-cols-3 divide-x-2 content-center h-full overflow-auto w-full">
+
+
+
+            <div class="h-full w-full content-center">
+              <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+                <ion-label>L 1</ion-label>
+                <ion-radio slot="start" color="light" value="1"></ion-radio>
+              </div>
+            </div>
+
+            <div class="h-full w-full content-center">
+              <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+                <ion-label>L2</ion-label>
+                <ion-radio slot="start" color="light" value="2"></ion-radio>
+              </div>
+            </div>
+            <div class="h-full w-full content-center">
+              <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+                <ion-label>L3</ion-label>
+                <ion-radio slot="start" color="light" value="3"></ion-radio>
+              </div>
+            </div>
+
+
+
+          </div>
+        </ion-radio-group>
+        </div>
+
+
+
+        <div class="w-full flex items-center justify-center pt-10">
+          <ion-button (click)="AddCourse()" fill="outline" color="secondary" mode="ios">Add Course</ion-button>
+        </div>
+      </div>
+
+
+      </div>
+
+
+      <button ion-button title="closeb" class="absolute top-5 right-5 scale-150" (click)="minimizeMenu()">
+        <ion-icon name="close-circle-outline" class="scale-105"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- MD blob -->
+  <div id="menu" [ngClass]="{ 'hidden': isMenuHidden }" class="fixed md:w-screen block md:hidden lg:hidden bg-white dark:bg-black h-2/3 z-30 left-3 right-3  bottom-0 rounded-t-2xl shadow-2xl overflow-scroll">
+  <div>
+    <!-- Input Text -->
+    <div class="w-full pt-16 pb-10">
+      <div class="relative h-12 w-full pl-10 pr-10 min-w-[200px]">
+        <input
+
+
+        title="Course"
+        class=" peer h-full w-full rounded-xl focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp "
+        placeholder="Course Name "
+        type="text"
+        maxlength="255" />
+
+      </div>
+    </div>
+
+  <div class="pl-10 pr-10 ">
+    <div class="relative w-ful h-full max-h-56 shadow-xl  rounded-t-3xl bg-purp overflow-auto">
+      <ion-radio-group>
+      <div class="grid grid-cols-1 divide-y content-center h-full overflow-auto w-full">
+
+
+
+        <div class="h-full w-full content-center">
+          <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+            <ion-label>GLSI</ion-label>
+            <ion-radio mode="md" slot="start" color="light" value="1"></ion-radio>
+          </div>
+        </div>
+
+        <div class="h-full w-full content-center">
+          <div class="h-10 text-white pt-5 pb-10 flex  pl-7 pr-7 w-full justify-between">
+            <ion-label>IOT</ion-label>
+            <ion-radio mode="md" slot="start" color="light" value="2"></ion-radio>
+          </div>
+        </div>
+
+
+
+      </div>
+    </ion-radio-group>
+    </div>
+
+
+
+    <div class="relative w-ful h-full max-h-56 shadow-xl  rounded-b-3xl bg-purp overflow-auto">
+      <ion-radio-group>
+      <div class="grid grid-cols-3 divide-x-2 content-center h-full overflow-auto w-full">
+
+
+
+        <div class="h-full w-full content-center">
+          <div class="h-10 text-white pt-5 pb-10 flex  pl-3 pr-7 w-full justify-between">
+            <ion-label>L1</ion-label>
+            <ion-radio mode="md" slot="start" color="light" value="1"></ion-radio>
+          </div>
+        </div>
+
+        <div class="h-full w-full content-center">
+          <div class="h-10 text-white pt-5 pb-10 flex  pl-3 pr-7 w-full justify-between">
+            <ion-label>L2</ion-label>
+            <ion-radio mode="md" slot="start" color="light" value="2"></ion-radio>
+          </div>
+        </div>
+        <div class="h-full w-full content-center">
+          <div class="h-10 text-white pt-5 pb-10 flex  pl-3 pr-7 w-full justify-between">
+            <ion-label>L3</ion-label>
+            <ion-radio mode="md" slot="start" color="light" value="3"></ion-radio>
+          </div>
+        </div>
+
+
+
+      </div>
+    </ion-radio-group>
+    </div>
+
+
+
+    <div class="w-full flex items-center justify-center pt-10">
+      <ion-button (click)="AddCourse()" fill="outline" color="secondary" mode="ios">Add Course</ion-button>
+    </div>
+  </div>
+
+
+  </div>
+
+  <button ion-button title="closeb" class="absolute top-5 right-5 scale-150" (click)="minimizeMenu()">
+    <ion-icon name="close-circle-outline" class="scale-105"></ion-icon>
+  </button>
+  </div>
+
+
+
+  <!-- Courses -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-  <button (click)="goToCoursePage()" class="hover:scale-105  ease-in-out duration-200">
-    <ion-card class="rounded-xl shadow-md bg-purp">
-      <ion-card-header>
-        <ion-card-title>Introduction to Computer Science</ion-card-title>
+  <div>
+    <ion-card class="rounded-2xl shadow-md bg-purp">
+      <button (click)="goToCoursePage()" class="hover:scale-105  ease-in-out duration-200">
+      <ion-card-header class="bg-white dark:bg-black">
+        <ion-card-title  class="h-28 flex items-center  justify-center content-center font-mono">Introduction to Computer Science</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ipsum a arcu interdum tincidunt id non ex.</p>
-      </ion-card-content>
+    </button>
+
       <ion-item>
-        <ion-icon name="time-outline" slot="start"></ion-icon>
-        <ion-label>Monday, Wednesday, Friday</ion-label>
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        <ion-label>You have 3 Assignments</ion-label>
       </ion-item>
       <ion-item>
         <ion-icon name="people-outline" slot="start"></ion-icon>
         <ion-label>Mr. Prof</ion-label>
       </ion-item>
-    </ion-card>
-  </button>
+      <div class="absolute top-5 right-0 w-10 h-10 " >
 
+        <button  title="settings" (click)="presentActionSheet()" class="">
+          <ion-icon name="ellipsis-vertical" class="text-black scale-125 dark:text-white"></ion-icon>
+        </button>
+
+
+      </div>
+    </ion-card>
+  </div>
   </div>
 </ion-content>
