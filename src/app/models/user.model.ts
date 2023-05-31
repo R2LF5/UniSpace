@@ -5,5 +5,6 @@ export interface User {
   email: string;
   role: string;
   phoneNumber: string;
+  firstLogin: string;
   // add more fields if your user has more information
 }

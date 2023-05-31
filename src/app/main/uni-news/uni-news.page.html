@@ -9,12 +9,10 @@
 
 
       }">
-      <div class="flex justify-between p-4">
+      <div class="flex justify-around  pt-4 pb-4">
         <div class="flex space-x-4">
-          <div>
-            <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
-          </div>
-          <div class="flex items-center justify-center ">
+
+          <div class="flex items-center justify-center w-full ">
           <!-- text area that automatically increases in height using tailwind and ionic  -->
           <textarea
           id="text-area"
@@ -27,12 +25,14 @@
           [disabled]="userRole === 'student'"
           maxlength="255"
           ></textarea>
-          <div class="text-right text-xs text-gray-500 ">
-            {{ descUpdate.length }} / 255
-          </div>
+
 
 
           </div>
+
+        </div>
+        <div class="pt-4 text-xs text-gray-500 h-full justify-center text-center items-center">
+          {{ descUpdate.length }} / 255
         </div>
         <div class=" "  >
             <!-- submit button -->

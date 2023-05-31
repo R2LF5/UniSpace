@@ -30,7 +30,7 @@
 
       <div class="flex justify-center mt-8 relative">
         <div class="relative">
-          <img [src]="imageSrc || 'https://tecdn.b-cdn.net/img/new/avatars/2.webp'" class="w-32 rounded-full mx-auto mb-[-2px]" alt="Avatar" />
+          <img [src]="imageSrc || '../../../assets/DefaultProfile.png'"  class="w-32 rounded-full mx-auto mb-[-2px]" alt="Avatar" />
           <div style="width: 30px; height: 30px; border-radius: 50%; background-color: rgb(156, 154, 154); display: flex; justify-content: center; align-items: center; position: absolute; bottom: 0; right: 0; transform: translate(6%, 6%);">
             <button type="button" title="addimage" (click)="uploadImage()" class="items-center justify-center ">
               <ion-icon name="camera-outline" class="flex items center justify-center w-5 h-5"></ion-icon>
@@ -109,7 +109,7 @@
 
 
 
-      <ion-toggle class="w-full items-center" color="secondary">keep my number private</ion-toggle><br /><br />
+
       <div>
         <ion-button (click)="update()" type="submit" color="secondary" class="w mt-6 w-full text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l">Next</ion-button>
       </div>

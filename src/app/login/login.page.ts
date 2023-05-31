@@ -54,22 +54,28 @@ export class LoginPage implements OnInit {
       localStorage.setItem('role',this.jwtHelper.decodeToken(res.token).role);
       const id = this.jwtHelper.decodeToken(res.token).id;
       localStorage.setItem('idLogin', id);
+      this.useruniService.findUserById(id).subscribe(user => {
+        // Store the first name and last name in local storage
+        localStorage.setItem('firstName', user.firstName);
+        localStorage.setItem('lastName', user.lastName);
+        localStorage.setItem('firstLogin',user.firstLogin);
+         // change res.firstlogin to this,useruniservice.finduserbyid.firstlogin == false
+        if (user.firstLogin === "false") {
+          // If it's not the first login, navigate to the dashboard
+          this.router.navigate(['/dashboard']);
+        } else if (user.firstLogin === "true") {
+          // If it's the first login, fetch the user's details
+          this.useruniService.findUserById(id).subscribe(user => {
+            // Store the first name and last name in local storage
+            localStorage.setItem('firstName', user.firstName);
+            localStorage.setItem('lastName', user.lastName);
 
-      // Check if it's the first login
-      if (res.firstLogin) {
-        // If it's the first login, navigate to the dashboard
-        this.router.navigate(['/dashboard']);
-      } else {
-        // If it's not the first login, fetch the user's details
-        this.useruniService.findUserById(id).subscribe(user => {
-          // Store the first name and last name in local storage
-          localStorage.setItem('firstName', user.firstName);
-          localStorage.setItem('lastName', user.lastName);
+            // Navigate to the setup page
+            this.router.navigate(['/setup']);
+          });
+        }
+      })
 
-          // Navigate to the setup page
-          this.router.navigate(['/setup']);
-        });
-      }
 
       console.log(res);
     })

@@ -137,6 +137,11 @@ const routes: Routes = [
     path: 'reset/:token',
     loadChildren: () => import('./login/new-password/new-password.module').then( m => m.NewPasswordPageModule)
   },
+  {
+    path: 'setup/department',
+    loadChildren: () => import('./login/dep-section/dep-section-routing.module').then( m => m.DepSectionPageRoutingModule)
+  },
+
 ];
 
 @NgModule({

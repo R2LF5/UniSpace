@@ -4,63 +4,67 @@
     <div class="blob">
       <svg id="desk" class="stretch" viewBox="0 0 1920 1080" preserveAspectRatio="none">
         <image href="../../assets/blobDesk.svg" />
-  
+
       </svg>
       <svg id="mob" class="stretch" viewBox="0 0 1080 1920" preserveAspectRatio="none">
         <image href="../../assets/blobMob.svg" />
-  
+
       </svg>
     </div>
-  
+
     <div class="yo meteor">
       <svg width="200" height="200" viewBox="0 0 800 800">
         <image href="../../assets/meteor.svg"/>
       </svg>
     </div>
-  
+
     <!--LOGO  -->
-      
+
     <!-- LOGIN FORM -->
     <div class="-mt-14 sm:mx-auto sm:w-full sm:max-w-md">
   <div class=" py-8 px-4 sm:shadow-xl shadow-none sm:rounded-lg sm:px-10">
-    
-  
+
+
    <!-- computer -->
-    
-   <h2 class=" mb-2 text-xl font-medium text-space dark:text-white text-center mt-2 ">Select Section</h2>
+
+   <h2 class=" mb-2 text-xl font-mono text-space dark:text-white text-center mt-2 ">Select Section</h2>
    <form class="space-y-6 mb-0 " action="#" method="POST">
     <div class="flex flex-wrap -mx-4">
       <div class="w-full md:w-1/2 px-4 mb-6">
         <div class="h-full container  justify-center items-center  w-full p-6 rounded-lg bg-purp dark:bg-purp ">
+          <ion-radio-group>
           <div class="text-white flex flex-col flex-grow lg:mt-8">
-            <ion-checkbox  mode="ios" color="secondary" class="text-white "> IoT</ion-checkbox>
+            <ion-radio  mode="md" color="secondary" class="text-white "> IoT</ion-radio>
           </div>
           <hr class="mt-4 mb-4">
           <div class="text-white flex flex-col flex-grow  ">
-            <ion-checkbox mode="ios" color="secondary" class="text-white ">GLSI</ion-checkbox>
+            <ion-radio mode="md" color="secondary" class="text-white ">GLSI</ion-radio>
           </div>
+          </ion-radio-group>
         </div>
       </div>
       <div class="w-full md:w-1/2 px-4 mb-6">
         <div class="h-full container flex flex-col p-6 rounded-lg bg-purp dark:bg-purp border-2">
+        <ion-radio-group>
           <div class="text-white flex flex-col flex-grow ">
-            <ion-checkbox mode="ios" color="secondary" class="text-white ">L1</ion-checkbox>
+            <ion-radio mode="md" color="light"  class="text-white ">L1</ion-radio>
           </div>
           <hr class="mt-4 mb-4">
           <div class="text-white flex flex-col flex-grow ">
-            <ion-checkbox  mode="ios" color="secondary" class="text-white ">L2</ion-checkbox>
+            <ion-radio  mode="md" color="light"  class="text-white ">L2</ion-radio>
           </div>
           <hr class="mt-4 mb-4">
           <div class="text-white flex flex-col flex-grow">
-            <ion-checkbox mode="ios" color="secondary" class="text-white ">L3</ion-checkbox>
+            <ion-radio mode="md" color="light"  class="text-white ">L3</ion-radio>
           </div>
+        </ion-radio-group>
         </div>
       </div>
     </div>
   </form>
-  
-  
-  
+
+
+
   <div>
     <ion-button type="submit" color="secondary" class="mt-8 w-80 text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l ">Finish</ion-button>
   </div>
@@ -68,6 +72,5 @@
   </div>
   </div>
   </ion-content>
-  
-  
-  
+
+

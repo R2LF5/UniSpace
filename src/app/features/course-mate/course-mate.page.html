@@ -1,15 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
+<ion-header mode="ios">
+  <ion-toolbar >
+    <ion-title class="bg-opacity-0">
       GLSI
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-black">
+<ion-content mode="ios" class="bg-black">
+
+  <div class="z-0  h-screen w-full absolute coursebg">
+
+  </div>
+  <div class="z-20">
+    <div class=" fixed bottom-1/3 lg:right-1/3 md:right-1/3 right-1/4  opacity-60 yo">
+      <svg width="200" height="200" viewBox="0 0 800 800">
+        <image href="../../assets/meteor.svg"/>
+      </svg>
+    </div>
   <!-- ionic circular add button -->
   <ion-fab class="fixed sm:bottom-10 sm:right-10 bottom-20 right-5 " >
-    <ion-fab-button id="addclass" class="add" (click)="toggleMenu()" >
+    <ion-fab-button id="addclass" class="add" color="light" (click)="toggleMenu()" >
       <ion-icon name="add" class="text-black w-7 h-7"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -18,18 +28,21 @@
 
   <!-- LG blob -->
   <div class="hidden" id="menu" [ngClass]="{ 'hidden': isMenuHidden }">
-    <div class="fixed sm:hidden hidden  md:block bg-white dark:bg-black lg:w-1/3 md:w-2/4 z-50 lg:right-10 lg:top-52 bottom-10 md:top-56 md:right-10   overflow-scroll rounded-2xl shadow-2xl ">
+    <div class="fixed sm:hidden hidden  md:block bg-white backdrop-blur-sm  bg-opacity-40 dark:bg-opacity-40 dark:bg-black lg:w-1/3 md:w-2/4 z-50 lg:right-10 lg:top-52 bottom-10 md:top-56 md:right-10   overflow-scroll rounded-2xl shadow-2xl ">
 
 
       <div>
         <!-- Input Text -->
         <div class="w-full pt-16 pb-10">
           <div class="relative h-12 w-full pl-10 pr-10 min-w-[200px]">
+           <div class="font-mono text-lg mb-2">
+            Add course
+           </div>
             <input
 
 
             title="Course"
-            class=" peer h-full w-full rounded-xl focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp "
+            class=" peer h-full w-full rounded-xl mb-10 focus:shadow-md border-Space dark:border-gray-400 border bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all focus:border-2 focus:border-purp "
             placeholder="Course Name "
             type="text"
             maxlength="255" />
@@ -39,7 +52,7 @@
 
       <div class="pl-10 pr-10 ">
         <div class="relative w-ful h-full max-h-56 shadow-xl  rounded-t-3xl bg-purp overflow-auto">
-          <ion-radio-group>
+          <ion-radio-group mode="md">
           <div class="grid grid-cols-1 divide-y-2 content-center h-full overflow-auto w-full">
 
 
@@ -67,7 +80,7 @@
 
 
         <div class="relative w-ful h-full max-h-56 shadow-xl border-t-2  rounded-b-3xl bg-purp overflow-auto">
-          <ion-radio-group>
+          <ion-radio-group mode="md">
           <div class="grid grid-cols-3 divide-x-2 content-center h-full overflow-auto w-full">
 
 
@@ -116,7 +129,7 @@
   </div>
 
   <!-- MD blob -->
-  <div id="menu" [ngClass]="{ 'hidden': isMenuHidden }" class="fixed md:w-screen block md:hidden lg:hidden bg-white dark:bg-black h-2/3 z-30 left-3 right-3  bottom-0 rounded-t-2xl shadow-2xl overflow-scroll">
+  <div id="menu" [ngClass]="{ 'hidden': isMenuHidden }" class="fixed md:w-screen block md:hidden backdrop-blur-sm lg:hidden bg-white  bg-opacity-40 dark:bg-opacity-40 dark:bg-black h-2/3 z-30 left-3 right-3  bottom-0 rounded-t-2xl shadow-2xl overflow-scroll">
   <div>
     <!-- Input Text -->
     <div class="w-full pt-16 pb-10">
@@ -135,7 +148,7 @@
 
   <div class="pl-10 pr-10 ">
     <div class="relative w-ful h-full max-h-56 shadow-xl  rounded-t-3xl bg-purp overflow-auto">
-      <ion-radio-group>
+      <ion-radio-group mode="md">
       <div class="grid grid-cols-1 divide-y content-center h-full overflow-auto w-full">
 
 
@@ -163,7 +176,7 @@
 
 
     <div class="relative w-ful h-full max-h-56 shadow-xl  rounded-b-3xl bg-purp overflow-auto">
-      <ion-radio-group>
+      <ion-radio-group mode="md">
       <div class="grid grid-cols-3 divide-x-2 content-center h-full overflow-auto w-full">
 
 
@@ -212,11 +225,11 @@
 
 
   <!-- Courses -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+  <div class="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 px-4">
   <div>
-    <ion-card class="rounded-2xl shadow-md bg-purp">
+    <ion-card color="light" class="rounded-2xl  shadow-md ">
       <button (click)="goToCoursePage()" class="hover:scale-105  ease-in-out duration-200">
-      <ion-card-header class="bg-white dark:bg-black">
+      <ion-card-header class="">
         <ion-card-title  class="h-28 flex items-center  justify-center content-center font-mono">Introduction to Computer Science</ion-card-title>
       </ion-card-header>
     </button>
@@ -240,4 +253,5 @@
     </ion-card>
   </div>
   </div>
+</div>
 </ion-content>

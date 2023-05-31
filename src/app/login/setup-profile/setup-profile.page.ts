@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { UserUniService } from '../../services/user-uni.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-setup-profile',
@@ -15,7 +16,13 @@ export class SetupProfilePage implements OnInit {
 
   formUpdate: FormGroup;
 
-  constructor(private router: Router, private alertController: AlertController, private builder:FormBuilder, private useruniService: UserUniService) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+    private builder:FormBuilder,
+    private useruniService: UserUniService,
+    private toastController: ToastController
+  ) {
     this.formUpdate= this.builder.group({
       id:[''],
       firstName: [''],
@@ -121,19 +128,60 @@ export class SetupProfilePage implements OnInit {
     });
     input.click();
   }
-  update() {
-    this.formUpdate= this.builder.group({
-      id:[localStorage.getItem('id')],
-      firstName: [this.firstName],
-      lastName:[this.lastName],
-      phoneNumber:[this.phoneNumber]
-    })
-    this.useruniService.updateUser(this.formUpdate.value).subscribe(res=>{
-      // clear local storage
-      localStorage.removeItem('firstName')
-      localStorage.removeItem('lastName')
-    })
 
+  async update(){
+  // Create the form group
+  this.formUpdate = this.builder.group({
+    firstName: [this.firstName],
+    lastName: [this.lastName],
+    phoneNumber: [this.unformattedPhoneNumber]
+  });
+
+  // Retrieve the form values
+  let formValues = this.formUpdate.value;
+
+  // Check if first name, last name and phone number meet the requirements
+  if(formValues.firstName && formValues.lastName && formValues.phoneNumber.length === 8){
+    // If they do, store them in the local storage
+    localStorage.setItem('firstName', formValues.firstName);
+    localStorage.setItem('lastName', formValues.lastName);
+    localStorage.setItem('phoneNumber', formValues.phoneNumber);
+
+    // Navigate to the next page
+    this.router.navigateByUrl('/setup/department');
+  } else {
+    // If they don't, show a toast message
+    let message = '';
+    if (!formValues.firstName || !formValues.lastName) {
+      message += 'First name and last name should not be empty. ';
+    }
+    if (formValues.phoneNumber.length !== 8) {
+      message += 'Phone number must be 8 digits long.';
+    }
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
+}
+
+
+
 
 }
+
+  // update() {
+  //   this.formUpdate= this.builder.group({
+  //     id:[localStorage.getItem('id')],
+  //     firstName: [this.firstName],
+  //     lastName:[this.lastName],
+  //     phoneNumber:[this.phoneNumber]
+  //   })
+  //   this.useruniService.updateUser(this.formUpdate.value).subscribe(res=>{
+  //     // clear local storage
+  //     localStorage.removeItem('firstName')
+  //     localStorage.removeItem('lastName')
+  //   })
+
+  // }

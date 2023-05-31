@@ -48,10 +48,10 @@
             <hr>
           </li>
           <li>
-            <button (click)="navigateToInbox()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space  dark:text-white w-full py-4 px-5">
-              <svg class=" mr-4 h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-              </svg>Messages
+            <button (click)="navigateToCalendar()" class="flex items-center hover:bg-orange-500 hover:bg-opacity-10 rounded-xl font-bold text-2xl text-center  text-Space  dark:text-white w-full py-4 px-5">
+
+              <ion-icon class=" mr-4 h-8 w-8"  name="calendar-outline"></ion-icon>
+              Calendar
             </button>
             <hr>
           </li>
@@ -191,12 +191,34 @@
 
 
     </div>
-    <div class="relative bottom-24 flex justify-center items-center w-screen">
-      <div (click)="navigateToCalendar()" class="w-16 h-16 dark:bg-white bg-gray-400 rounded-full flex items-center justify-center">
-      <button title="calendar" class="w-14 h-14 bg-white  dark:bg-black rounded-full z-10 scale-110 flex items-center justify-center" title="">
+    <div class="relative bottom-16 flex justify-center items-center w-screen">
+      <!-- <div  class="w-16 h-16 dark:bg-white bg-gray-400 rounded-full flex items-center justify-center">
+      <button title="calendar" (click)="navigateToCalendar()" class="w-14 h-14 bg-white  dark:bg-black rounded-full z-10 scale-110 flex items-center justify-center" title="">
         <ion-icon name="calendar" class="w-6 h-6 mb-1 text-gray-500 dark:text-white group-hover:text-black dark:group-hover:text-white"></ion-icon>
       </button>
-      </div>
+      </div> -->
+      <ion-fab slot="fixed" horizontal="center" >
+        <ion-fab-button color="light">
+          <ion-icon name="add" ></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button color="secondary">
+            <ion-icon name="person" class="text-white"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+        <ion-fab-list side="end">
+          <ion-fab-button color="secondary">
+            <ion-icon name="cog" class="text-white"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+        <ion-fab-list side="start">
+          <ion-fab-button color="secondary">
+            <ion-icon name="calendar" class="text-white"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+
+
     </div>
   </div>
   </div>
