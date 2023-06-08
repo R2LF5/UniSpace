@@ -19,49 +19,81 @@
   </div>
 
   <!--LOGO  -->
-    
+
   <!-- LOGIN FORM -->
   <div class="-mt-14 sm:mx-auto sm:w-full sm:max-w-md">
 <div class=" py-8 px-4 sm:shadow-xl shadow-none sm:rounded-lg sm:px-10">
-  
+
 
   <h2 class=" mb-2 text-xl font-medium text-space dark:text-white text-center mt-2 ">Select Section</h2>
     <!-- Math-->
-  <form class="space-y-6 mb-0 " action="#" method="POST">
-    <div class="flex flex-wrap -mx-4">
-      <div class="w-full md:w-1/2 px-4 mb-6">
-        <div class="h-full container  justify-center items-center  w-full p-6 rounded-lg bg-purp dark:bg-purp ">
-          <div class="text-white flex flex-col flex-grow lg:mt-8">
-            <ion-checkbox  mode="ios" color="secondary" class="text-white "> LMSD</ion-checkbox>
-          </div>
-          <hr class="mt-4 mb-4">
-          <div class="text-white flex flex-col flex-grow  ">
-            <ion-checkbox mode="ios" color="secondary" class="text-white ">LMI</ion-checkbox>
+    <form class="space-y-6 mb-0 " [formGroup]="form" action="#" method="POST">
+      <div class="flex flex-wrap -mx-4">
+        <div class="w-full md:w-1/2 px-4 mb-6">
+          <div class="h-full container flex flex-col p-6 rounded-lg bg-purp dark:bg-purp border-2">
+            <div *ngIf="role === 'Professor'; else radioGroupSection">
+              <div class="text-white flex flex-col flex-grow ">
+                <ion-checkbox mode="ios" value="LMSD" color="secondary" class="text-white " (ionChange)="toggleSelection($event, 'LMSD', 1)">LMSD</ion-checkbox>
+              </div>
+              <hr class="mt-4 mb-4">
+              <div class="text-white flex flex-col flex-grow ">
+                <ion-checkbox mode="ios" value="LMI" color="secondary" class="text-white " (ionChange)="toggleSelection($event, 'LMI', 1)">LMI</ion-checkbox>
+              </div>
+            </div>
+            <ng-template #radioGroupSection>
+              <ion-radio-group formControlName="section">
+                <div class="text-white flex flex-col flex-grow ">
+                  <ion-radio mode="md" value="LMSD" color="secondary" class="text-white ">LMSD</ion-radio>
+                </div>
+                <hr class="mt-4 mb-4">
+                <div class="text-white flex flex-col flex-grow ">
+                  <ion-radio mode="md" value="LMI" color="secondary" class="text-white ">LMI</ion-radio>
+                </div>
+              </ion-radio-group>
+            </ng-template>
           </div>
         </div>
-      </div>
+
       <div class="w-full md:w-1/2 px-4 mb-6">
         <div class="h-full container flex flex-col p-6 rounded-lg bg-purp dark:bg-purp border-2">
-          <div class="text-white flex flex-col flex-grow ">
-            <ion-checkbox mode="ios" color="secondary" class="text-white ">L1</ion-checkbox>
+          <div *ngIf=" role === 'Professor'; else radioGroup">
+            <div class="text-white flex flex-col flex-grow ">
+              <ion-checkbox mode="ios" value="L1" color="secondary" class="text-white " (ionChange)="toggleSelection($event, 'L1', 2)">L1</ion-checkbox>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="text-white flex flex-col flex-grow ">
+              <ion-checkbox mode="ios" value="L2" color="secondary" class="text-white " (ionChange)="toggleSelection($event, 'L2', 2)">L2</ion-checkbox>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="text-white flex flex-col flex-grow">
+              <ion-checkbox mode="ios" value="L3" color="secondary" class="text-white " (ionChange)="toggleSelection($event, 'L3', 2)">L3</ion-checkbox>
+            </div>
           </div>
-          <hr class="mt-4 mb-4">
-          <div class="text-white flex flex-col flex-grow ">
-            <ion-checkbox  mode="ios" color="secondary" class="text-white ">L2</ion-checkbox>
-          </div>
-          <hr class="mt-4 mb-4">
-          <div class="text-white flex flex-col flex-grow">
-            <ion-checkbox mode="ios" color="secondary" class="text-white ">L3</ion-checkbox>
-          </div>
+          <ng-template #radioGroup>
+            <ion-radio-group formControlName="Level">
+              <div class="text-white flex flex-col flex-grow ">
+                <ion-radio mode="md" value="L1" color="secondary" class="text-white ">L1</ion-radio>
+              </div>
+              <hr class="mt-4 mb-4">
+              <div class="text-white flex flex-col flex-grow ">
+                <ion-radio mode="md" value="L2" color="secondary" class="text-white ">L2</ion-radio>
+              </div>
+              <hr class="mt-4 mb-4">
+              <div class="text-white flex flex-col flex-grow">
+                <ion-radio mode="md" value="L3" color="secondary" class="text-white ">L3</ion-radio>
+              </div>
+            </ion-radio-group>
+          </ng-template>
         </div>
       </div>
+
     </div>
   </form>
 
 
 
   <div>
-    <ion-button type="submit" color="secondary" class="mt-8 w-80 text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l ">Finish</ion-button>
+    <ion-button type="button" (click)="update()" color="secondary" class="mt-8 w-80 text-Space dark:text-gray-400 h-11 overflow-hidden rounded-l ">Finish</ion-button>
   </div>
 </div>
 </div>

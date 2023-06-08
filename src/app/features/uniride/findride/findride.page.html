@@ -1,0 +1,54 @@
+<ion-header mode="md" >
+  <ion-toolbar>
+    <ion-title size="large">Find Rides </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content mode="ios" [fullscreen]="true">
+<div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+  <ion-card mode="ios" *ngFor="let carpool of Carpools" >
+    <ion-card-header>
+      <ion-card-subtitle class="font-mono">Date: {{carpool.date}}</ion-card-subtitle>
+      <ion-card-subtitle class="font-mono">Rating: 4.2 / 5</ion-card-subtitle>
+
+      <ion-card-title>{{carpool.driver.firstName}} {{carpool.driver.lastName}}</ion-card-title>
+      <!-- time  -->
+
+      <ion-chip class=" items-center justify-center absolute top-5 right-4" >
+        <ion-icon name="time"></ion-icon>
+        <ion-label position="center" class="font-mono font-bold">{{carpool.time}}</ion-label>
+      </ion-chip>
+    </ion-card-header>
+
+    <ion-card-content  class="font-mono text-black dark:text-white font-bold">
+      <div class="grid grid-cols-2 pb-2 ">
+        <p class="pt-2 ">Available Seats: </p>
+        <ion-chip class="flex w-full items-center justify-center" >
+          <ion-icon name="people"></ion-icon>
+          <ion-label position="center">{{carpool.availableSeats}} / 4</ion-label>
+        </ion-chip>
+      </div>
+      <hr>
+      <div class="grid grid-cols-2 pt-2">
+      <p class="pb-2 pt-2">Price per Seat:</p>
+      <ion-chip class="flex w-full items-center justify-center" >
+        <ion-icon name="card" color="primary"></ion-icon>
+        <ion-label position="center">{{carpool.price}} TND</ion-label>
+      </ion-chip>
+      </div>
+
+      <div class="grid grid-cols-2 pt-3">
+        <ion-button color="secondary" class=" pl-5 pr-5 text-black font-mono "  fill="outline"  (click)="requestJoin()">
+          Request Join
+          <!-- icon + -->
+
+          <ion-icon slot="add" name="star"></ion-icon>
+        </ion-button>
+        <ion-button color="secondary" class=" pl-5 pr-5 font-mono text-black" (click)="viewOnMaps(carpool.fromLocation, carpool.toLocation)">View On Maps</ion-button>
+      </div>
+
+
+    </ion-card-content>
+  </ion-card>
+
+</div>
+</ion-content>

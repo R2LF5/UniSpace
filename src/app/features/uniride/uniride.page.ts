@@ -4,7 +4,8 @@ import 'leaflet-routing-machine';
 declare let navigator: any;
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { ToastController } from '@ionic/angular';
+import { CarpoolService } from 'src/app/services/carpool.service';
 
 
 @Component({
@@ -13,14 +14,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./uniride.page.scss'],
 })
 export class UniridePage implements OnInit, AfterViewInit {
+  CL: string = '';
 
   @ViewChild('map') mapContainer: any;
   map: any;
   distance:  number = 0;
 
 
-  constructor(private alertController: AlertController, private router: Router) {}
+  constructor(
+    private alertController: AlertController,
+    private router: Router,
+    public toastController: ToastController,
+    private carpoolService : CarpoolService,
+    ) {
 
+  }
+  startMarker!: L.Marker;
+  endMarker!: L.Marker;
 
   routingOptions: any;
   routingControl: any;
@@ -31,6 +41,8 @@ export class UniridePage implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.loadMap();
   }
+
+
 
   loadMap() {
     L.Icon.Default.imagePath = 'assets/UniRide/';
@@ -44,15 +56,11 @@ export class UniridePage implements OnInit, AfterViewInit {
       minZoom: 7,
     }).addTo(this.map);
 
-    // Define the maximum bounds for the map
     const maxBounds = L.latLngBounds(
       L.latLng(26.274757, 6.988017), // southwest corner
       L.latLng(40.947592, 14.370829) // northeast corner
     );
 
-
-
-    // Restrict the map view to Tunisia
     this.map.setMaxBounds(maxBounds);
     this.map.on('drag', () => {
       this.map.panInsideBounds(maxBounds, { animate: false });
@@ -62,33 +70,26 @@ export class UniridePage implements OnInit, AfterViewInit {
       this.map.invalidateSize();
     }, 10);
 
-
-    // Define a custom icon for the current location
     const currentLocationIcon = L.icon({
       iconUrl: '../../assets/locate-outline-copy.svg',
       iconSize: [32, 32],
       iconAnchor: [16, 16],
     });
 
-    // Add a marker for the current location with the custom icon
     navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
       const { latitude, longitude } = position.coords;
       this.map.setView([latitude, longitude], 15);  // Set zoom level to 10
       L.marker([latitude, longitude], { icon: currentLocationIcon }).addTo(this.map);
 
-      // Invalidate size here, after the map's view has been set
       setTimeout(() => {
         this.map.invalidateSize();
       }, 0);
     });
-      // Remove the directions control
-      if (this.map['osrmControl']) {
-        this.map.removeControl(this.map['osrmControl']);
-      }
 
+    if (this.map['osrmControl']) {
+      this.map.removeControl(this.map['osrmControl']);
+    }
 
-
-    // Define routing options
     this.routingOptions = {
       waypoints: [
         L.latLng(36.833356, 10.147994), //depart
@@ -96,9 +97,41 @@ export class UniridePage implements OnInit, AfterViewInit {
       ],
       routeWhileDragging: true,
       show: false,
+      createMarker: (i: number, start: { latLng: L.LatLng }, n: number) => {
+        const marker = L.marker(start.latLng, {
+          draggable: true
+        });
+        if (i === 0) {
+          marker.on('dragend', (event) => {
+            const position = event.target.getLatLng();
+            const lat = position.lat.toFixed(6);
+            const lng = position.lng.toFixed(6);
+            const searchBar = document.getElementById('departSearchbar') as HTMLInputElement;
+            if (searchBar) {
+              searchBar.value = `${lat},${lng}`;
+            }
+            this.routingOptions.waypoints[0] = L.latLng(lat, lng);
+            this.refreshRoute();
+          });
+        } else {
+          marker.on('dragend', (event) => {
+            const position = event.target.getLatLng();
+            const lat = position.lat.toFixed(6);
+            const lng = position.lng.toFixed(6);
+            const searchBar = document.getElementById('arrivalSearchbar') as HTMLInputElement;
+            if (searchBar) {
+              searchBar.value = `${lat},${lng}`;
+            }
+            this.routingOptions.waypoints[1] = L.latLng(lat, lng);
+            this.refreshRoute();
+          });
+        }
+
+
+        return marker;
+      }
     };
 
-    // Create the routing control and add it to the map
     this.routingControl = L.Routing.control(this.routingOptions).addTo(this.map);
 
     this.routingControl.on('route', (e: any) => {
@@ -106,6 +139,7 @@ export class UniridePage implements OnInit, AfterViewInit {
       this.distance = route.totalDistance;
     });
   }
+
 
 
 
@@ -153,9 +187,16 @@ export class UniridePage implements OnInit, AfterViewInit {
       await alert.present();
     }
   }
+
+
+  currentLocation: string = '';
+
+  // button for current location on searchbars
   setLocationToCurrent(title: string) {
     navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
       const { latitude, longitude } = position.coords;
+      this.currentLocation = `${latitude},${longitude}`;
+
       if (title === 'depCurrent') {
         this.routingOptions.waypoints[0] = L.latLng(latitude, longitude);
         // Update the search bar value
@@ -177,6 +218,7 @@ export class UniridePage implements OnInit, AfterViewInit {
     console.log('Setting location to current for ', title);
   }
 
+  // buton for FST location on searchbars
   setLocationToFST(title: string) {
     const latitude = 36.833356;
     const longitude = 10.147994;
@@ -198,6 +240,8 @@ export class UniridePage implements OnInit, AfterViewInit {
     // Refresh the route
     this.refreshRoute();
   }
+
+  // when inputing a custom coordinate it sets it on map
   onSearchChange(event: any, type: string) {
     const value = event.detail.value;
     const coordinates = value.split(',').map((coord: string) => parseFloat(coord.trim()));
@@ -208,7 +252,7 @@ export class UniridePage implements OnInit, AfterViewInit {
         this.routingOptions.waypoints[0] = L.latLng(coordinates[0], coordinates[1]);
       } else if (type === 'arrival') {
         this.routingOptions.waypoints[1] = L.latLng(coordinates[0], coordinates[1]);
-      } 
+      }
       // Refresh the route
       this.refreshRoute();
     }
@@ -216,17 +260,20 @@ export class UniridePage implements OnInit, AfterViewInit {
 
 
   refreshRoute() {
-    // Remove the existing routing control
+    // Remove the existing route
     if (this.routingControl) {
       this.map.removeControl(this.routingControl);
     }
+
     // Create a new routing control with the updated waypoints
     this.routingControl = L.Routing.control(this.routingOptions).addTo(this.map);
+
     this.routingControl.on('route', (e: any) => {
       const route = e.route;
       this.distance = route.totalDistance;
     });
   }
+
 
 
 
@@ -238,5 +285,163 @@ export class UniridePage implements OnInit, AfterViewInit {
   }
   navigateToInbox() {
     this.router.navigate(['/inbox'], { skipLocationChange: true });
+  }
+
+
+
+
+
+// add carpool form
+  async AddPool() {
+    const departSearchBar = document.getElementById('departSearchbar') as HTMLInputElement;
+    const destinationSearchBar = document.getElementById('arrivalSearchbar') as HTMLInputElement;
+    let depart = departSearchBar.value;
+    let destination = destinationSearchBar.value;
+    console.log('Depart: ', depart);
+    console.log('Destination: ', destination);
+    // If the input is "Current Location", get user's current location
+    if (depart === 'Current Location' || destination === 'Current Location') {
+      if (depart === 'Current Location') {
+        depart = this.CL;
+      }
+      if (destination === 'Current Location') {
+        destination = this.CL;
+      }
+    }
+
+
+
+    // If the input is "FST", use the FST coordinates
+    if (depart === 'FST') {
+      depart = '36.8116786,10.0614824';
+    }
+    if (destination === 'FST') {
+      destination = '36.8116786,10.0614824';
+    }
+
+    const id = localStorage.getItem('id');
+    const role = localStorage.getItem('role');
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    let formattedToday = yyyy + '-' + mm + '-' + dd;
+    if (depart !== 'Insert Coordinates' &&  destination !== 'Insert Coordinates' ) {
+      if (depart !== '' || destination !== '') {
+      const alert = await this.alertController.create({
+        header: 'Add Ride',
+        subHeader: 'Departure and destination were selected from the map',
+        mode: 'ios',  // Force iOS look
+        inputs: [
+          {
+            name: 'seats',
+            type: 'number',
+            min: 1,
+            max: 4,
+            placeholder: 'Number of seats'
+          }, {
+            name: 'price',
+            type: 'number',
+            min: 0,
+            placeholder: 'Price per seat (TND)'
+          }, {
+            name: 'time',
+            type: 'time',
+            placeholder: 'Time'
+          }, {
+            name: 'date',
+            type: 'date',
+            value: formattedToday,
+            min: formattedToday,
+            placeholder: 'Date (YYYY-MM-DD, defaults to today)'
+          }
+      ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          }, {
+            text: 'Add',
+            handler: (alertData) => {
+              if (!alertData.seats || !alertData.price || !alertData.time || !alertData.date) {
+                this.presentToast('All fields must be filled');
+                return false;
+              }
+
+              else if (alertData.seats < 1 || alertData.seats > 4) {
+                this.presentToast('Number of seats must be between 1 and 4');
+                return false;
+              }
+
+              else if (alertData.price <= 0) {
+                this.presentToast('Price must be greater than 0');
+                return false;
+              }
+              else{
+                let carpoolData = {
+                  "fromLocation": depart,
+                  "toLocation": destination,
+                  "departureTime": `${alertData.date}T${alertData.time}`,
+                  "availableSeats": alertData.seats,
+                  "price": alertData.price,
+                  "driver": {
+                    "id": id,
+                    "role": role,
+                  }
+
+                }
+                this.carpoolService.addCarpool(carpoolData).subscribe(response => {
+                  console.log(response);
+                  this.presentToast('Ride added');
+                }, error => {
+                  this.presentToast('Error adding ride');
+                  console.log(error);
+                });
+              }
+              this.presentToast('Ride added');
+
+              return true;  // Close the alert
+          }
+
+
+          }
+        ]
+      });
+      await alert.present();
+    }
+    }
+    else{
+      this.presentToast('Dont forget to set Depart and Destination');
+    }
+  }
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+  // find ride button route to find page with all the values from inputs
+  async navigateToFindRide() {
+    const departSearchBar = document.getElementById('departSearchbar') as HTMLInputElement;
+    const destinationSearchBar = document.getElementById('arrivalSearchbar') as HTMLInputElement;
+
+    if (departSearchBar && destinationSearchBar) {
+      const depart = departSearchBar.value;
+      const destination = destinationSearchBar.value;
+
+      if (depart && destination) {
+        this.router.navigate(['/dashboard/UniRide/findride', depart, destination]);
+      } else {
+        // Display an alert or some other message to indicate that both values need to be filled in
+        const toast = await this.toastController.create({
+          message: 'Both departure and destination coordinates must be filled in.',
+          duration: 2000
+        });
+        toast.present();
+      }
+    }
   }
 }

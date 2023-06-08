@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { PostService } from '../../services/post.service';
+import { UserUniService } from '../../services/user-uni.service';
+import { EventService } from '../../services/event.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { formatDistanceToNow } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { ToastController } from '@ionic/angular';
+import { User } from '../../models/user.model';
+
 
 @Component({
   selector: 'app-uni-news',
@@ -24,7 +28,10 @@ export class UniNewsPage implements OnInit {
     private postService: PostService,
     private router: Router,
     private actionSheetController: ActionSheetController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userUniService: UserUniService,
+    private eventService: EventService,
+
 
   ) {
     this.userRole = localStorage.getItem('role') || '';
@@ -47,12 +54,23 @@ export class UniNewsPage implements OnInit {
       course: [''],
     });
   }
-
+  today!: string ;
   previewImages: string[] = [];
-
+  currentUser!: User;
+  id:string='';
   ngOnInit(): void {
+    this.id= localStorage.getItem('id') || '';
+    this.today = new Date().toISOString().split('T')[0];
+    const userId = localStorage.getItem('id');
+    if (userId) {
+      this.userUniService.findUserById(+userId).subscribe(user => {
+        this.currentUser = user;
+      });
+    }
+
     this.postService.findAllPosts().subscribe((data: any[]) => {
       this.posts = this.processPosts(data).reverse();
+      console.log(this.posts);
     });
   }
 
@@ -69,6 +87,57 @@ export class UniNewsPage implements OnInit {
       }
     });
   }
+
+
+
+  name:string='';
+  description:string='';
+  location:string='';
+  Date:string='';
+  departments:any;
+  guest:string='';
+
+
+  AddEvent(): void {
+
+    const departmentControl = this.eventForm.get('department');
+    const descriptionControl = this.eventForm.get('description');
+
+    if (departmentControl && descriptionControl) {
+      const departments = departmentControl.value;
+      const description = descriptionControl.value;
+      const datetimeControl = this.eventForm.get('datetime');
+
+      const id = localStorage.getItem('id');
+      if (datetimeControl) {
+        const event = {
+          name: this.name,
+          description: `${description} Departments: ${departments.join(', ')}`,
+          location: this.location,
+          guestNumber: this.guest,
+          startDate: this.Date,
+          clubPresident: {
+            id: id,
+            role: 'ClubPresident'
+          }
+        };
+
+        this.eventService.createEvent(event).subscribe(response => {
+          console.log(response);
+        });
+      } else {
+        console.error('Datetime control not found');
+      }
+    } else {
+      console.error('Department or description control not found');
+    }
+
+  }
+
+
+
+
+
 
 
 
@@ -89,9 +158,9 @@ export class UniNewsPage implements OnInit {
           type: 'Update',
           hidden: false,
           admin:{
-            id:localStorage.getItem('idLogin'),
+            id:localStorage.getItem('id'),
             role:role
-            // how do i test bech naaref eli it got sent b shih ?
+
 
         }
 
@@ -103,9 +172,10 @@ export class UniNewsPage implements OnInit {
           type: 'Update',
           hidden: false,
           professor:{
-            id:localStorage.getItem('idLogin'),
-            role:role
-
+            id:localStorage.getItem('id'),
+            role:role,
+            firstName: localStorage.getItem('firstName'),
+            lastName: localStorage.getItem('lastName')
         }
 
         });
@@ -170,17 +240,18 @@ export class UniNewsPage implements OnInit {
   }
 
 
-  async presentActionSheet(postId: number) {
+  async presentActionSheet(id: number) {
+    console.log(id);
     const actionSheet = await this.actionSheetController.create({
       buttons: [
         {
           text: 'Delete',
           icon: 'trash',
           handler: () => {
-            this.postService.hidePost(postId).subscribe((response) => {
+            this.postService.hidePost(id).subscribe((response) => {
               console.log(response); // Handle response here
               // Find the post and set its 'hidden' property to true
-              const post = this.posts.find(p => p.id === postId);
+              const post = this.posts.find(p => p.id === id);
               if (post) {
                 post.hidden = true;
               }

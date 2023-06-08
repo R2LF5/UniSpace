@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DashboardPage } from './dashboard/dashboard.page';
 import { UniNewsPage } from './main/uni-news/uni-news.page';
 import { UniridePage } from './features/uniride/uniride.page';
+
 import { EventlinkPage } from './main/eventlink/eventlink.page';
 import { CourseMatePage } from './features/course-mate/course-mate.page';
 import { InboxPage } from './features/inbox/inbox.page';
@@ -17,7 +18,13 @@ const routes: Routes = [
     component: DashboardPage,
     children: [
       { path: 'UniNews', component: UniNewsPage },
-      { path: 'UniRide', component: UniridePage },
+      {
+        path: 'UniRide',
+        children: [
+          { path: '', component: UniridePage },
+          { path: 'findride/:depart/:destination', loadChildren: () => import('./features/uniride/findride/findride.module').then( m => m.FindridePageModule) },
+        ]
+      },
       { path: 'EventLink', component: EventlinkPage },
       { path: 'CourseMate', component: CourseMatePage },
       { path: 'Course', component: CoursePage },
@@ -136,6 +143,10 @@ const routes: Routes = [
   {
     path: 'reset/:token',
     loadChildren: () => import('./login/new-password/new-password.module').then( m => m.NewPasswordPageModule)
+  },
+  {
+    path: 'findride/:depart/:destination',
+    loadChildren: () => import('./features/uniride/findride/findride.module').then( m => m.FindridePageModule)
   },
   {
     path: 'setup/department',

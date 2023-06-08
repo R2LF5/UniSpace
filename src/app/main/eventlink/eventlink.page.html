@@ -22,11 +22,7 @@
         <aside class="">
           <div>
             <h1 class="mt-10 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Description</h1>
-            <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
-               la composition et la mise en page avant impression. Le Lorem Ipsum est
-               le faux texte standard de l'imprimerie depuis les années 1500, quand un
-               imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen
-               imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen
+            <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >    {{ selectedEvent?.description }}
             </p>
             <h2 class="mt-4 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white">Sections</h2>
             <div class="grid grid-cols-2 ml-10 mr-10 mt-2 gap-20">
@@ -44,14 +40,12 @@
           <div class="grid grid-cols-2 divide-x">
             <div>
               <h1 class="mt-8 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Date</h1>
-              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
-                la composition et la mise en page avant impression.
+              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >    {{ selectedEvent?.startDate | date:'dd MMM' }}
               </p>
             </div>
             <div>
               <h1 class="mt-8 mb-2 text-start font-sans ml-8 font-bold text-Space dark:text-white" >Event Location</h1>
-              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >Le Lorem Ipsum est simplement du faux texte employé dans
-                la composition et la mise en page avant impression.
+              <p class="ml-8 text-sm font-sans text-Space mt-4 dark:text-white" >    {{ selectedEvent?.location }}
               </p>
             </div>
           </div>
@@ -79,7 +73,7 @@
 
           </div>
           <div class="h-24 mb-14 grid grid-cols-2 gap-10 pl-10 pr-10">
-            <ion-button fill="outline" class="w-full"  color="success">
+            <ion-button (click)="joinEvent(selectedEvent?.id)"  fill="outline" class="w-full"  color="success">
               <ion-icon name="calendar"  slot="start"></ion-icon>
               Join
             </ion-button>
@@ -238,33 +232,34 @@
           </div>
           <div class="grid lg:grid-cols-3 gap-6 md:grid-cols-2 grid-cols-1 ">
 
+            <div *ngFor="let event of events">
 
-              <button (click)="toggleMenu()">
-            <ion-card class="mb-6 hover:scale-105 rounded-2xl  transition duration-300 ease-in-out ml-4 ">
-              <div class="w-full ">
-                <img alt="" class="object-cover w-full h-48" src="../../../assets/R.jpg" />
+              <button (click)="toggleMenu(event)">
+              <ion-card class="mb-6 hover:scale-105 rounded-2xl w-full  transition duration-300 ease-in-out ml-4 ">
+                <div class="w-full ">
+                  <img alt="" class="object-cover w-full h-48" src="../../../assets/R.jpg" />
+                </div>
+
+                <div class="">
+                <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
+                  <div>
+                    <ion-card-title class="text-Space  pt-3 dark:text-white">{{ event.name }}</ion-card-title>
+                    <!-- <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle> -->
+                  </div>
+                  <div>
+                    <ion-card-subtitle class=" text-lg font-mono mt-2 text-Space dark:text-white">{{ event.startDate | date:'dd MMM' }}</ion-card-subtitle>
+                  </div>
+
+                </ion-card-header>
+
+                <ion-card-content class="text-Space font-mono w-fill dark:text-white dark:bg-gray-950">
+                  {{ event.description | slice:0:50 }}...
+                </ion-card-content>
               </div>
-
-              <div class="">
-              <ion-card-header class="grid grid-cols-2 gap-3 dark:bg-gray-950">
-                <div>
-                  <ion-card-title class="text-Space dark:text-white">Info Hack</ion-card-title>
-                  <ion-card-subtitle class=" text-sm text-Space dark:text-white">By Info CLub</ion-card-subtitle>
-                </div>
-                <div>
-                  <ion-card-subtitle class=" text-lg font-mono mt-2 text-Space dark:text-white">13 June</ion-card-subtitle>
-                </div>
-
-              </ion-card-header>
-
-              <ion-card-content class="text-Space font-mono dark:text-white dark:bg-gray-950">
-                Here's a small text description for the event content.
-              </ion-card-content>
+              <ion-card-subtitle class=" text-lg font-mono mt-2 text-Space dark:text-white backdrop-blur-sm bg-white bg-opacity-30 rounded-2xl w-24 absolute top-0 right-5">13/50</ion-card-subtitle>
+              </ion-card>
+              </button>
             </div>
-            <ion-card-subtitle class=" text-lg font-mono mt-2 text-Space dark:text-white backdrop-blur-sm bg-white bg-opacity-30 rounded-2xl w-24 absolute top-0 right-5">13/50</ion-card-subtitle>
-            </ion-card>
-            </button>
-
           </div>
         </div>
 

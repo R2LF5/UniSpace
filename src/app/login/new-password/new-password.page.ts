@@ -77,7 +77,7 @@ export class NewPasswordPage implements OnInit {
       newPassword:[this.pass1],
       confirmedPassword:[this.pass2]
     })
-    this.useruniService.newPasswordService(this.formNewPass.value).subscribe(res=>{
+    this.useruniService.newPasswordService(this.activateroute.snapshot.params['token'],this.pass1, this.pass2).subscribe(res=>{
 
       this.presentToast('Password Reset Successfully').then(()=>{
         this.goToLoginPage();

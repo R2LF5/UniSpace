@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { UserUniService } from '../services/user-uni.service';
-import { User } from '../models/user.model';
+import { User, UserExcel } from '../models/user.model';
+import * as XLSX from 'xlsx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -12,13 +14,21 @@ export class AdminPage implements OnInit {
   constructor(
     public alertController: AlertController,
     public popoverController: PopoverController,
-    private userUniService: UserUniService
+    private userUniService: UserUniService,
+    private router: Router,
   ) {}
 
   users: User[] = [];
+  userRole: string = '';
 
+  loginToken: string='';
   ngOnInit() {
     this.getUsers();
+    this.loginToken=  localStorage.getItem('token') || '';
+    this.userRole = localStorage.getItem('role')|| '';
+    if(this.loginToken == '' && this.userRole !== 'Admin'){
+      this.router.navigate(['/login']);
+    }
   }
 
   getUsers() {
@@ -33,9 +43,12 @@ export class AdminPage implements OnInit {
   }
 
   // LEAVE BUTTON
-  async confirmLeave() {
+  async confirmLeave(id: number) {
+    if (id === undefined || id === null) {
+      console.error('Invalid id');
+      return;
+    }
     const alert = await this.alertController.create({
-
       mode: 'ios',
       header: 'Alert',
       message: 'Are you sure you want to delete this user?',
@@ -47,11 +60,41 @@ export class AdminPage implements OnInit {
         {
           text: 'Confirm',
           handler: () => {
-            // Handle deleting the user
+            this.userUniService.deactivateUserService(id.toString()).subscribe(res => {
+              console.log("success delete");
+            });
           },
         }
       ],
+    });
 
+    await alert.present();
+  }
+
+  // activate BUTTON
+  async Activate(id: number) {
+    if (id === undefined || id === null) {
+      console.error('Invalid id');
+      return;
+    }
+    const alert = await this.alertController.create({
+      mode: 'ios',
+      header: 'Alert',
+      message: 'Are you sure you want to delete this user?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+            this.userUniService.deactivateUserService(id.toString()).subscribe(res => {
+              console.log("success delete");
+            });
+          },
+        }
+      ],
     });
 
     await alert.present();
@@ -136,6 +179,8 @@ export class AdminPage implements OnInit {
     await alert.present();
   }
 
+
+
   async userNumbers() {
     //const userCount = await this.userService.getUserCount(); // Assuming the user count is retrieved from a UserService
 
@@ -151,6 +196,41 @@ export class AdminPage implements OnInit {
     await alert.present();
   }
 
+
+  readFile(event: any){
+    const target: DataTransfer = <DataTransfer>(event.target);
+    const reader: FileReader = new FileReader();
+    console.log('read from excel');
+    reader.readAsBinaryString(target.files[0]);
+    reader.onload = (e: any) => {
+          console.log('read from excel');
+
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+      const wsname = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+      let data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+      // Print the Excel Data
+      console.log(data);
+      let i = 0;
+      data.forEach(element => {
+        console.log('for ',element)
+        i=i+1;
+
+       let user = new UserExcel();
+       user.email=ws['A'+i].v;
+       user.password=ws['B'+i].v;
+       user.role=ws['C'+i].v;
+       console.log(user);
+       this.userUniService.registerUser(user).subscribe
+       (res=>{
+        console.log(res);
+       })
+      });
+    }
+
+
+  }
 
 }
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient,  HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
@@ -20,13 +20,18 @@ export class UserUniService {
     return this.http.post(url, formReset, { responseType: 'text' });
   }
 
-  newPasswordService(formNewPass: any) {
+  newPasswordService(token: any, pass1:any, pass2:any) {
+    let httpParams = new HttpParams();
+    httpParams=httpParams.append('token',token);
+    httpParams=httpParams.append('password',pass1);
+    httpParams=httpParams.append('confirmedPassword',pass2);
+
     const url = 'http://localhost:8080/api/v1/user/reset';
-    return this.http.post(url, formNewPass, { responseType: 'text' });
+    return this.http.get(url,  { responseType: 'text' , params: httpParams });
   }
 
   getAllUsers() {
-    return this.http.get<User[]>('http://localhost:8080/api/v1/user/findAll');
+    return this.http.get<User[]>('http://localhost:8080/api/v1/user/findAllUsers');
   }
 
   findUserById(id: number): Observable<User> {
@@ -34,8 +39,20 @@ export class UserUniService {
   }
 
   updateUserFirstLogin(id: string, user: User): Observable<User> {
-    const url = `http://localhost:8080/api/v1/user/${id}/first-login`;
+    const url = `http://localhost:8080/api/v1/professor/update/`+id;
     return this.http.put<User>(url, user);
+  }
+
+  updateProfessor(id:string , user: User){
+     return this.http.put<User>(`http://localhost:8080/api/v1/professor/update/${id}`, user);
+  }
+
+  updateStudent(id:string , user: User){
+    return this.http.put<User>(`http://localhost:8080/api/v1/student/update/${id}`, user);
+  }
+
+  updateAdmin(id:string , user: User){
+    return this.http.put<User>(`http://localhost:8080/api/v1/admin/update/${id}`, user);
   }
 
   changePasswordService(id: string, currentPassword: string, newPassword: string) {
@@ -56,6 +73,11 @@ export class UserUniService {
   addUser(user: User): Observable<User> {
     const url = 'http://localhost:8080/api/v1/user/add';
     return this.http.post<User>(url, user);
+  }
+
+  registerUser(user: any): Observable<User> {
+    const url = 'http://localhost:8080/api/v1/auth/register';
+    return this.http.post<any>(url, user);
   }
 
   deleteUserById(id: string): Observable<{}> {

@@ -1,36 +1,37 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private baseUrl = 'http://localhost:8080/api/v1/course';
+
+  private readonly API_URL = 'http://localhost:8080/api/v1/course';
 
   constructor(private http: HttpClient) { }
 
   addCourse(course: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/addCourse`, course);
+    return this.http.post(`${this.API_URL}/addCourse`, course);
   }
 
   findAllCourses(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/findAllCourses`);
+    return this.http.get(`${this.API_URL}/findAllCourses`);
   }
 
   findCourseById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/findBy/${id}`);
+    return this.http.get(`${this.API_URL}/findBy/${id}`);
   }
 
   updateCourse(id: number, course: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/courses/${id}`, course);
+    return this.http.put(`${this.API_URL}/courses/${id}`, course);
   }
 
-  getCoursesBySection(sectionId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/courses/bySection/${sectionId}`);
+  getCoursesBySection(id: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/courses/bySection/${id}`);
   }
 
-  getCoursesByProfessor(professorId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/courses/byProfessor/${professorId}`);
+  getCoursesByProfessor(id: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/courses/byProfessor/${id}`);
   }
 }

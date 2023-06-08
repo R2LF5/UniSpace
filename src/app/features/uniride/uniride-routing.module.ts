@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'addpool',
     loadChildren: () => import('./addpool/addpool.module').then( m => m.AddpoolPageModule)
-  }
+  },
 ];
 
 @NgModule({

@@ -2,10 +2,10 @@
 <div class="h-screen overflow-hidden">
 
   <div class="z-0">
-    <div #map id="map" class="h-screen"></div>
+    <div #map id="map" class="h-screen"></div>  
   </div>
 
-  <div class="absolute inset-x-0 bottom-0 h-3/7 sm:h-3/7 md:h-2/5 lg:h-2/5 bg-white dark:bg-black z-40 rounded-t-3xl w-full shadow-3xl grid grid-cols-1 overflow-hidden">
+  <div class="absolute inset-x-0 bottom-0 h-3/7 sm:h-3/7 md:h-2/5 lg:h-2/5 bg-white bg-opacity-90  dark:bg-opacity-95 dark:bg-black z-40 rounded-t-3xl w-full shadow-3xl grid grid-cols-1 overflow-hidden">
 
 
 <!-- search here -->
@@ -16,13 +16,13 @@
     <ion-searchbar id="departSearchbar" show-clear-button="always" value="FST" mode="ios" class="w-5/6" (ionChange)="onSearchChange($event, 'depart')"></ion-searchbar>
     <div class="md:pl-5 pl-0  w-1/6  grid grid-cols-2 ">
       <div class="pt-5  right-0">
-        <button title="depCurrent" (click)="setLocationToCurrent('depCurrent')">
+        <button type="button" title="depCurrent" (click)="setLocationToCurrent('depCurrent')">
           <ion-icon name="locate-outline" class="h-6 w-6"></ion-icon>
         </button>
       </div>
 
       <div class=" pt-5 right-0 ">
-        <button title="depFST" (click)="setLocationToFST('depFST')">
+        <button type="button" title="depFST" (click)="setLocationToFST('depFST')">
 
           <ion-icon name="school-outline" class=" h-6 w-6  " ></ion-icon>
         </button>
@@ -35,13 +35,13 @@
     <ion-searchbar id="arrivalSearchbar" show-clear-button="always" value="Insert Coordinates" mode="ios" class="w-5/6" (ionChange)="onSearchChange($event, 'arrival')"></ion-searchbar>
     <div class="md:pl-5 pl-0 w-1/6  grid grid-cols-2">
       <div class="pt-5 right-0">
-        <button title="arrCurrent" (click)="setLocationToCurrent('arrCurrent')" class="z-50" >
+        <button type="button" title="arrCurrent" (click)="setLocationToCurrent('arrCurrent')" class="z-50" >
           <ion-icon name="locate-outline" class="h-6 w-6"></ion-icon>
         </button>
       </div>
 
       <div class="pt-5 right-0 ">
-        <button title="arrFST" (click)="setLocationToFST('arrFST')">
+        <button type="button" title="arrFST" (click)="setLocationToFST('arrFST')">
           <ion-icon name="school-outline" class=" h-6 w-6  " ></ion-icon>
         </button>
       </div>
@@ -55,6 +55,7 @@
       fill="outline"
       color="secondary"
       mode="ios"
+      (click)="navigateToFindRide()"
       data-te-ripple-init>
 
       <ion-icon slot="start" name="search-outline" class="text-black dark:text-white h-5 w-5" ></ion-icon>
@@ -66,7 +67,10 @@
       fill="outline"
       color="secondary"
       mode="ios"
-      data-te-ripple-init>
+      data-te-ripple-init
+      (click)="AddPool()">
+
+
 
       <ion-icon slot="start" name="add" class="text-black dark:text-white h-5 w-5" ></ion-icon>
       <span class="font-mono text-black dark:text-white">Add Ride</span>

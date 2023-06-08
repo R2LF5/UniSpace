@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { ActionSheetController} from '@ionic/angular';
 import { ThemeService } from '../services/theme.service'; // adjust the path as needed
-
+import { AlertController, ToastController } from '@ionic/angular';
+// import useruniservice
+import { UserUniService } from '../services/user-uni.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -19,6 +21,10 @@ export class DashboardPage implements OnInit {
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
     public actionSheetController: ActionSheetController,
+    public alertController: AlertController,
+    public toastController: ToastController,
+    // add useruniservice
+    public userUniService: UserUniService
 
   ){
     // initialize isMenuHidden based on screen size
@@ -28,9 +34,16 @@ export class DashboardPage implements OnInit {
     }
   }
   userRole: string = '';
+  loginToken: string ='';
 
   ngOnInit() {
+    // get id from localstorage
     this.userRole = localStorage.getItem('role') || '';
+    this.loginToken=  localStorage.getItem('token') || '';
+    // if loginToken is empty route to login
+    if(this.loginToken == ''){
+      this.router.navigate(['/login']);
+    }
 
 
   }
@@ -91,7 +104,10 @@ export class DashboardPage implements OnInit {
       this.isMenuHidden = true;
     }
   }
-
+  edit(){
+    // route to setup
+    this.router.navigate(['/setup']);
+  }
   navigateToUniNews() {
     this.router.navigateByUrl('/dashboard/UniNews');
   }
@@ -128,4 +144,145 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
+
+
+
+
+  async ChangePassword() {
+    const id=localStorage.getItem('id');
+    if (id === null) {
+      console.error('ID not found in local storage');
+      return;
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      mode: 'ios',
+      header: 'Change Password',
+      inputs: [
+        {
+          name: 'oldPassword',
+          type: 'password',
+          placeholder: 'Old Password'
+        },
+        {
+          name: 'newPassword',
+          type: 'password',
+          placeholder: 'New Password'
+        },
+        {
+          name: 'repeatPassword',
+          type: 'password',
+          placeholder: 'Repeat New Password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Ok',
+          handler: async (alertData) => {
+            // Check if any input is empty
+            if (!alertData.oldPassword || !alertData.newPassword || !alertData.repeatPassword) {
+              const toast = await this.toastController.create({
+                message: 'Please fill in all fields.',
+                duration: 2000
+              });
+              toast.present();
+              return false;
+            }
+
+            // Check if old password matches
+
+            // Check if new passwords match
+            if (alertData.newPassword !== alertData.repeatPassword) {
+              const toast = await this.toastController.create({
+                message: 'New passwords do not match.',
+                duration: 2000
+              });
+              toast.present();
+              return false;
+            }
+
+            // Check if new password is at least 8 characters long
+            if (alertData.newPassword.length < 8) {
+              const toast = await this.toastController.create({
+                message: 'New password must be at least 8 characters long.',
+                duration: 2000
+              });
+              toast.present();
+              return false;
+            }
+
+            // Password change is successful
+
+            this.userUniService.changePasswordService(id.toString(), alertData.oldPassword, alertData.newPassword).subscribe(
+                res => {
+                    console.log('Response:', res);
+                },
+                err => {
+                    console.error('Error:', err);
+                }
+            );
+
+
+
+
+            return true;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+  async Settings() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Options',
+      mode: 'ios',  // Force iOS look
+
+      buttons: [
+        {
+          text: 'Edit Profile',
+          icon: 'person',
+          handler: () => {
+            this.router.navigateByUrl('/Setup');
+          }
+        }, {
+          text: 'Change Password',
+          icon: 'key',
+          handler: () => {
+            this.ChangePassword();
+          }
+        }, {
+          text: 'Switch Appearance',
+          icon: 'moon',
+          handler: () => {
+            console.log('Switch appearance clicked');
+            // Add your logic for switching appearance here
+          }
+        }, {
+          text: 'Sign Out',
+          icon: 'log-out',
+          handler: () => {
+            console.log('Sign out clicked');
+          }
+        }, {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
 }
+

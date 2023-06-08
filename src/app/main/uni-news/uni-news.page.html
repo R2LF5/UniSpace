@@ -5,14 +5,15 @@
 
       <div class="container flex flex-col w-full max-w-lg 5 p- mx-auto  rounded-2xl shadow-xl divide-gray-700 bg-gray-100 z-50 dark:bg-black  dark:border-2 border-purp mt-4 mb-6"
       [ngClass]="{
-        'cursor-not-allowed': userRole === 'student',
-
-
+        'cursor-not-allowed': userRole === 'Student',
       }">
-      <div class="flex justify-around  pt-4 pb-4">
-        <div class="flex space-x-4">
 
-          <div class="flex items-center justify-center w-full ">
+      <div class="flex justify-between p-4">
+        <div class="flex space-x-4">
+          <div>
+            <img [src]="currentUser?.photo" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+          </div>
+          <div class="flex items-center justify-center ">
           <!-- text area that automatically increases in height using tailwind and ionic  -->
           <textarea
           id="text-area"
@@ -22,21 +23,19 @@
           cols="30"
           spellcheck="false"
           [(ngModel)]="descUpdate"
-          [disabled]="userRole === 'student'"
+          [disabled]="userRole === 'Student'"
           maxlength="255"
           ></textarea>
-
+          <div class="text-right text-xs text-gray-500 ">
+            {{ descUpdate.length }} / 255
+          </div>
 
 
           </div>
-
-        </div>
-        <div class="pt-4 text-xs text-gray-500 h-full justify-center text-center items-center">
-          {{ descUpdate.length }} / 255
         </div>
         <div class=" "  >
             <!-- submit button -->
-            <ion-button (click)="submitUpdate()" shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline"     [disabled]="userRole === 'student'">Post</ion-button>
+            <ion-button (click)="submitUpdate()" shape="round" class="-mt-3" position="" mode="ios" color="secondary" fill="outline"     [disabled]="userRole === 'Student'">Post</ion-button>
 
 
 
@@ -46,11 +45,11 @@
 
 
          <!-- post type -->
-         <div class=" space-y-8 text-sm text-white" *ngIf="userRole !== 'student'" >
+         <div class=" space-y-8 text-sm text-white" *ngIf="userRole !== 'Student'" >
           <div class="grid  grid-cols-4 text-black dark:text-white h-full w-full" >
             <button
 
-              [disabled]="userRole === 'student'"
+              [disabled]="userRole === 'Student'"
               [ngClass]="{'bg-gray-200 dark:bg-gray-900': updateSelected}"
               (click)="selectUpdate()"
               class="hover:bg-gray-200 dark:hover:bg-gray-800 rounded-bl-2xl  dark:block w-full h-16"
@@ -58,7 +57,7 @@
               Update
             </button>
             <button
-              [disabled]="userRole === 'student' || userRole === 'clubPresident'"
+              [disabled]="userRole === 'Student' || userRole === 'clubPresident'"
               [ngClass]="{'bg-gray-200 dark:bg-gray-900':assignmentSelected}"
               (click)="selectAssignment()"
               class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16"
@@ -66,12 +65,12 @@
               Assignment
             </button>
             <button
-              [disabled]="userRole === 'student' || userRole === 'clubPresident'"
+              [disabled]="userRole === 'Student' || userRole === 'clubPresident'"
               [ngClass]="{'bg-gray-200 dark:bg-gray-900':assignmentSelected}"
               (click)="selectAssignment()"
               class="hover:bg-gray-200 dark:hover:bg-gray-800   dark:block w-full h-16"
             >
-              Course Material
+              Resource
             </button>
             <button
               [disabled]="userRole === 'student' || userRole === 'professor' "
@@ -95,39 +94,51 @@
           <form [formGroup]="eventForm">
           <!-- forum stuff -->
           <!-- Text Area for Description -->
-          <ion-item >
-            <ion-label position="stacked">Description</ion-label>
-            <ion-textarea formControlName="description"></ion-textarea>
+          <ion-item>
+            <ion-input label="Event Title"  [(ngModel)]="name" labelPlacement="floating" placeholder="Enter text"></ion-input>
+
+          </ion-item>
+          <ion-item>
+            <ion-input  label="Description" [(ngModel)]="description" labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-input  label="Location" [(ngModel)]="location" labelPlacement="floating" placeholder="Enter text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input  label="Guest Number" type="number" [(ngModel)]="guest" labelPlacement="floating" placeholder="Enter text"></ion-input>
+          </ion-item>
 
           <!-- Calendar Input for Event Date and Time -->
-          <ion-item >
-              <ion-label position="stacked">Date and Time</ion-label>
-              <div class="w-full flex justify-center items-center">
-              <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios"></ion-datetime>
-              </div>
+          <ion-item>
+            <ion-label position="stacked">Date and Time</ion-label>
+            <div class="w-full flex justify-center items-center">
+              <!-- <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios" [min]="today"></ion-datetime> -->
+              <ion-datetime class="scale-90 rounded-xl" mode="ios" locale="es-ES" [(ngModel)]="Date"></ion-datetime>
+            </div>
           </ion-item>
+
 
           <!-- Select Input for Department -->
           <ion-item >
             <ion-label position="stacked">Department</ion-label>
-            <ion-select formControlName="department" [disabled]="eventForm.controls['allDepartments'].value">
-                <ion-select-option value="dept1">Department 1</ion-select-option>
-                <ion-select-option value="dept2">Department 2</ion-select-option>
-                <ion-select-option value="dept3">Department 3</ion-select-option>
-                <ion-select-option value="dept4">Department 4</ion-select-option>
-                <ion-select-option value="dept5">Department 5</ion-select-option>
-                <ion-select-option value="dept6">Department 6</ion-select-option>
-                <ion-select-option value="dept7">Department 7</ion-select-option>
+            <ion-select  [(ngModel)]="departments" multiple>
+                <ion-select-option value="Math">Math</ion-select-option>
+                <ion-select-option value="Physics">Physics</ion-select-option>
+                <ion-select-option value="Computer Science">Computer Science</ion-select-option>
+                <ion-select-option value="Biology">Biology</ion-select-option>
+                <ion-select-option value="Geology">Geology</ion-select-option>
+                <ion-select-option value="Chemistry">Chemistry</ion-select-option>
+
             </ion-select>
         </ion-item>
 
         <!-- Toggle for All Departments -->
-        <ion-item >
+        <!-- <ion-item >
             <ion-label>All Departments</ion-label>
             <ion-toggle formControlName="allDepartments" color="secondary"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
 
     <!-- input type image with drag and drop -->
@@ -141,7 +152,7 @@
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG or GIF</p>
           </div>
           <input  title="images" id="dropzone" type="file" class="hidden" accept="image/*" (change)="onFileChange($event)" />
           <!-- preview container  -->
@@ -153,6 +164,8 @@
         </label>
 
     </div>
+    <!-- ion button submit -->
+    <ion-button expand="block" color="success" (click)="AddEvent()" [disabled]="!eventForm.valid">Submit</ion-button>
 
           </form>
         </div>
@@ -165,7 +178,7 @@
         <!-- Assigmnent -->
 
 <div *ngIf="assignmentFormVisible">
-          <form [formGroup]="assignmentForm">
+          <form>
             <!-- forum stuff -->
           <!-- Text Area for Description -->
           <ion-item >
@@ -241,30 +254,32 @@
       <div class="flex justify-between p-4">
         <div class="flex space-x-4">
           <div>
-            <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+            <img [src]="userRole === 'Admin' ? post.admin.photo : (userRole === 'ClubPresident' ? post.clubPresident.photo : post.professor.photo)" alt="pfp" class="object-cover w-12 h-12 rounded-full bg-gray-500">
           </div>
           <div>
-            <h4 *ngIf="post.admin!==null" class="font-bold text-xl text-orange-500">{{post.admin.firstName +' '+post.admin.lastName}}</h4>
-            <h4 *ngIf="post.professor!==null" class="font-bold text-xl text-orange-500">{{post.professor.firstName +' '+post.professor.lastName}}</h4>
+            <h4 *ngIf="post.admin || post.professor" class="font-bold text-xl text-orange-500">
+              {{ (post.admin?.firstName ? post.admin.firstName : post.professor?.firstName) +' '+ (post.admin?.lastName ? post.admin.lastName : post.professor?.lastName) }}
+            </h4>
+
 
             <span class="text-xs text-white">{{ post.formattedTimestamp }}</span>
           </div>
         </div>
         <div class="flex items-center space-x-2 " >
 
-          <button title="AddToCalendar">
+          <button title="AddToCalendar" *ngIf="post.type === 'Event' || post.type === 'Assignment'">
            <ion-icon name="calendar-outline" class="scale-150" color="light"></ion-icon>
           </button>
-          <button  title="settings" (click)="presentActionSheet(post.id)">
+          <button  title="settings" (click)="presentActionSheet(post.id)" *ngIf="post.professor?.id === id || post.admin?.id === id ">
             <ion-icon name="ellipsis-vertical" color="light"></ion-icon>
           </button>
-
+      
 
         </div>
       </div>
       <div class="p-4 space-y-8 text-sm text-white">
         <p class="">{{post.description}}</p>
-        <div class="w-36 mt -8 " *ngIf="post.type === 'Course' || post.type === 'Assignment'">
+        <div class="w-36 mt -8 " *ngIf=" post.type === 'Course' || post.type === 'Assignment'">
           <a href="/path/to/file.pdf" download class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-2 rounded flex items-center">
             <ion-icon class="h-5 w-5 mr-2" name="cloud-download"></ion-icon>
             Download File
