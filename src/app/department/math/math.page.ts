@@ -84,16 +84,34 @@ export class MathPage implements OnInit {
     // Handle multiple selections for Professors
     if (role === 'Professor') {
       this.sectionService.findIdsByNameAndDegreeLIST(this.selectedCheckboxesGroup1,this.selectedCheckboxesGroup2).subscribe(
-        ids=>{
-          console.log('Returned IDs:', ids);
-        }, error => {
+        ids => {
+          // console.log('Returned IDs:', ids);
+          const sectionIds = ids.map(id => ({ id }));
+          const user: User = {
+            id: userId ? parseInt(userId) : 0,
+            firstName: firstName ? firstName : '',
+            lastName: lastName ? lastName : '',
+            photo: photo ? photo:'',
+            firstLogin: 'false',
+            phoneNumber: phoneNumber ? phoneNumber : '',
+            role: role ? role : '',
+            department:{
+              id: 1,
+            },
+            sections: sectionIds,
+          };
+
+          this.useruniService.updateProfessor(user.id.toString(), user).subscribe(res => {
+            this.router.navigate(['/dashboard']);
+          });
+        },
+        error => {
           console.error('Error occurred:', error);
           // Handle the error...
         }
       )
-
-
     }
+
     // Handle single selection for Students
     else if (role === 'Student') {
       this.sectionService.findIdByNameAndDegree(formValue.section, formValue.Level).subscribe(response => {

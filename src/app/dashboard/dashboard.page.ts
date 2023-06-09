@@ -250,7 +250,7 @@ export class DashboardPage implements OnInit {
           text: 'Edit Profile',
           icon: 'person',
           handler: () => {
-            this.router.navigateByUrl('/Setup');
+            this.router.navigateByUrl('/setup');
           }
         }, {
           text: 'Change Password',

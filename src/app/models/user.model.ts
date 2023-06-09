@@ -15,9 +15,10 @@ export interface User {
   department?: {
     id: number;
   },
-  sections?:[ {
-    id: number;
-  }]
+  sections?: {
+    id: number
+  }[];
+
 
   // add more fields if your user has more information
 }

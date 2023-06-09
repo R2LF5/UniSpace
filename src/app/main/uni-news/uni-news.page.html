@@ -10,8 +10,8 @@
 
       <div class="flex justify-between p-4">
         <div class="flex space-x-4">
-          <div>
-            <img [src]="currentUser?.photo" alt="" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+          <div class="hidden sm:block">
+            <img [src]="currentUser?.photo ?? '../../../assets/DefaultProfile.png'" alt="profile picture" class="object-cover w-12 h-12 rounded-full bg-gray-500">
           </div>
           <div class="flex items-center justify-center ">
           <!-- text area that automatically increases in height using tailwind and ionic  -->
@@ -95,19 +95,19 @@
           <!-- forum stuff -->
           <!-- Text Area for Description -->
           <ion-item>
-            <ion-input label="Event Title"  [(ngModel)]="name" labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input label="Event Title"   labelPlacement="floating" placeholder="Enter text"></ion-input>
 
           </ion-item>
           <ion-item>
-            <ion-input  label="Description" [(ngModel)]="description" labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input  label="Description"  labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input  label="Location" [(ngModel)]="location" labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input  label="Location"  labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input  label="Guest Number" type="number" [(ngModel)]="guest" labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input  label="Guest Number" type="number"  labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
           <!-- Calendar Input for Event Date and Time -->
@@ -115,7 +115,7 @@
             <ion-label position="stacked">Date and Time</ion-label>
             <div class="w-full flex justify-center items-center">
               <!-- <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios" [min]="today"></ion-datetime> -->
-              <ion-datetime class="scale-90 rounded-xl" mode="ios" locale="es-ES" [(ngModel)]="Date"></ion-datetime>
+              <ion-datetime class="scale-90 rounded-xl" mode="ios" locale="es-ES" ></ion-datetime>
             </div>
           </ion-item>
 
@@ -123,7 +123,7 @@
           <!-- Select Input for Department -->
           <ion-item >
             <ion-label position="stacked">Department</ion-label>
-            <ion-select  [(ngModel)]="departments" multiple>
+            <ion-select multiple>
                 <ion-select-option value="Math">Math</ion-select-option>
                 <ion-select-option value="Physics">Physics</ion-select-option>
                 <ion-select-option value="Computer Science">Computer Science</ion-select-option>
@@ -254,13 +254,12 @@
       <div class="flex justify-between p-4">
         <div class="flex space-x-4">
           <div>
-            <img [src]="userRole === 'Admin' ? post.admin.photo : (userRole === 'ClubPresident' ? post.clubPresident.photo : post.professor.photo)" alt="pfp" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+            <img [src]="(userRole === 'Admin' ? post.admin.photo : (userRole === 'ClubPresident' ? post.clubPresident.photo : post.professor.photo)) ?? '../../../assets/DefaultProfile.png'" alt="pfp" class="object-cover w-12 h-12 rounded-full bg-gray-500">
           </div>
           <div>
             <h4 *ngIf="post.admin || post.professor" class="font-bold text-xl text-orange-500">
               {{ (post.admin?.firstName ? post.admin.firstName : post.professor?.firstName) +' '+ (post.admin?.lastName ? post.admin.lastName : post.professor?.lastName) }}
             </h4>
-
 
             <span class="text-xs text-white">{{ post.formattedTimestamp }}</span>
           </div>
@@ -270,10 +269,11 @@
           <button title="AddToCalendar" *ngIf="post.type === 'Event' || post.type === 'Assignment'">
            <ion-icon name="calendar-outline" class="scale-150" color="light"></ion-icon>
           </button>
-          <button  title="settings" (click)="presentActionSheet(post.id)" *ngIf="post.professor?.id === id || post.admin?.id === id ">
+          <button  title="settings" (click)="presentActionSheet(post.id)"  *ngIf="isMatchingId(post.professor?.id, id) || isMatchingId(post.admin?.id, id)">
             <ion-icon name="ellipsis-vertical" color="light"></ion-icon>
           </button>
-      
+
+
 
         </div>
       </div>

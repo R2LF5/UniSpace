@@ -27,13 +27,18 @@ export class LoginPage implements OnInit {
 }
 
   ngOnInit() {
-    const id = localStorage.getItem('id');
-    const token = localStorage.getItem('token');
-    const firstLogin = localStorage.getItem('firstLogin');
+    // const id = localStorage.getItem('id');
+     // delcare variable that takes user.firstLogin value
+     let fl : string = localStorage.getItem('firstLogin') || '';
 
-    if(id && token && firstLogin) {
-      firstLogin === "false" ? this.router.navigate(['/dashboard']) : this.router.navigate(['/setup']);
-    }
+     if(fl === "false"){
+       this.router.navigate(['/dashboard']);
+       // console.log('1')
+     }
+     else if ( fl ==="true"){
+       this.router.navigate(['/setup']);
+       // console.log('2')
+     }
   }
 
   passwordType: string = 'password';
@@ -83,12 +88,16 @@ export class LoginPage implements OnInit {
       else{
         localStorage.setItem('firstLogin', "false");
       }
+      // delcare variable that takes user.firstLogin value
+      let fl : string = localStorage.getItem('firstLogin') || '';
 
-      if(user.firstLogin==="false")
-        { this.router.navigate(['/dashboard']);
+      if(fl === "false"){
+        this.router.navigate(['/dashboard']);
+        // console.log('1')
       }
-      else{
+      else if ( fl ==="true"){
         this.router.navigate(['/setup']);
+        // console.log('2')
       }
       });
     }, err => {

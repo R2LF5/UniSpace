@@ -74,6 +74,10 @@ export class UniNewsPage implements OnInit {
     });
   }
 
+  isMatchingId(id1: any, id2: any): boolean {
+    return Number(id1) === Number(id2);
+  }
+
   loadMorePosts(event: Event) {
     this.postService.findAllPosts().subscribe((data: any[]) => {
       // Reverse the order of the new posts and add them to the beginning of the existing posts
@@ -262,13 +266,14 @@ export class UniNewsPage implements OnInit {
             });
           },
         },
-        {
-          text: 'Edit',
-          icon: 'create',
-          handler: () => {
-            // Handle edit button click
-          },
-        },
+        // add edit in the back lol
+        // {
+        //   text: 'Edit',
+        //   icon: 'create',
+        //   handler: () => {
+
+        //   },
+        // },
         {
           text: 'Cancel',
           icon: 'close',

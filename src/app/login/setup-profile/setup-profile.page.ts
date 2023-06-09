@@ -42,10 +42,7 @@ export class SetupProfilePage implements OnInit {
   ngOnInit() {
     this.role = localStorage.getItem('role')||'';
     const FL = localStorage.getItem('firstLogin') || '';
-    if(FL==="false"){
-      // route to dashboard
-      this.router.navigateByUrl('/dashboard');
-    }
+
     const storedFirstName = localStorage.getItem('firstName') || '';
     const storedLastName = localStorage.getItem('lastName') || '';
     const storedPhoneNubmer = localStorage.getItem('PhoneNumber') || '';
