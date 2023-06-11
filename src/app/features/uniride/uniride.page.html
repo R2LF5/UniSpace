@@ -2,7 +2,7 @@
 <div class="h-screen overflow-hidden">
 
   <div class="z-0">
-    <div #map id="map" class="h-screen"></div>  
+    <div #map id="map" class="h-screen"></div>
   </div>
 
   <div class="absolute inset-x-0 bottom-0 h-3/7 sm:h-3/7 md:h-2/5 lg:h-2/5 bg-white bg-opacity-90  dark:bg-opacity-95 dark:bg-black z-40 rounded-t-3xl w-full shadow-3xl grid grid-cols-1 overflow-hidden">
@@ -55,6 +55,7 @@
       fill="outline"
       color="secondary"
       mode="ios"
+      [disabled]="driverRides.length > 0"
       (click)="navigateToFindRide()"
       data-te-ripple-init>
 
@@ -67,6 +68,7 @@
       fill="outline"
       color="secondary"
       mode="ios"
+      [disabled]="passengerRides.length > 0"
       data-te-ripple-init
       (click)="AddPool()">
 
@@ -102,7 +104,13 @@
     </div>
   </button>
 
-  <button title="Message" ion-button color="secondary" class="absolute h-14 w-14 focus:bg-gray-950 rounded-full bottom-2/4 right-2 z-50 bg-gray-800 shadow-xl dark:bg-white" (click)="navigateToInbox()">
+  <button
+    [disabled]="driverRides.length === 0 || passengerRides.length === 0"
+    [ngClass]="{ 'cursor-not-allowed opacity-80': driverRides.length === 0 || passengerRides.length === 0 }"
+    title="Inbox"
+    ion-button color="secondary"
+    class="absolute h-14 w-14 focus:bg-gray-950 rounded-full bottom-2/4 right-2 z-50 bg-gray-800 shadow-xl dark:bg-white"
+    (click)="navigateToInbox()">
     <div class="w-full h-full flex items-center text-center justify-center scale-90">
       <ion-icon name="paper-plane" color="light" class="w-9 h-9 scale-90"></ion-icon>
     </div>

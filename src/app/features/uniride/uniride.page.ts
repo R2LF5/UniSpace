@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { CarpoolService } from 'src/app/services/carpool.service';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-uniride',
@@ -19,6 +19,8 @@ export class UniridePage implements OnInit, AfterViewInit {
   @ViewChild('map') mapContainer: any;
   map: any;
   distance:  number = 0;
+  driverRides: any = [];
+  passengerRides: any = [];
 
 
   constructor(
@@ -26,6 +28,7 @@ export class UniridePage implements OnInit, AfterViewInit {
     private router: Router,
     public toastController: ToastController,
     private carpoolService : CarpoolService,
+    private http: HttpClient,
     ) {
 
   }
@@ -36,7 +39,22 @@ export class UniridePage implements OnInit, AfterViewInit {
   routingControl: any;
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    // declare id from localstrorage
+    let id = localStorage.getItem('id')?.toString() ;
+    console.log(id)
+    // get driver rides
+    this.http.get(`http://localhost:8080/api/v1/carpool/byDriver/${id}`).subscribe(data => {
+      this.driverRides = data;
+      console.log(this.driverRides);  // log inside subscribe
+    });
+
+    // get passenger rides
+    this.http.get(`http://localhost:8080/api/v1/carpool/byPassenger/${id}`).subscribe(data => {
+      this.passengerRides = data;
+      console.log(this.passengerRides);  // log inside subscribe
+    });
+  }
 
   ngAfterViewInit() {
     this.loadMap();
@@ -202,7 +220,7 @@ export class UniridePage implements OnInit, AfterViewInit {
         // Update the search bar value
         const searchBar = document.getElementById('departSearchbar') as HTMLInputElement;
         if (searchBar) {
-          searchBar.value = 'Current Location';
+          searchBar.value = this.currentLocation;
         }
       } else if (title === 'arrCurrent') {
         this.routingOptions.waypoints[1] = L.latLng(latitude, longitude);
@@ -425,23 +443,64 @@ export class UniridePage implements OnInit, AfterViewInit {
 
   // find ride button route to find page with all the values from inputs
   async navigateToFindRide() {
-    const departSearchBar = document.getElementById('departSearchbar') as HTMLInputElement;
-    const destinationSearchBar = document.getElementById('arrivalSearchbar') as HTMLInputElement;
+    let departSearchBarElem = document.getElementById('departSearchbar') as HTMLInputElement;
+    let destinationSearchBarElem = document.getElementById('arrivalSearchbar') as HTMLInputElement;
 
-    if (departSearchBar && destinationSearchBar) {
-      const depart = departSearchBar.value;
-      const destination = destinationSearchBar.value;
+    if (departSearchBarElem && destinationSearchBarElem) {
+      let depart = departSearchBarElem.value;
+      let destination = destinationSearchBarElem.value;
+      let validCoordPattern = /^-?\d{1,3}\.\d+, ?-?\d{1,3}\.\d+$/; // a regex pattern to validate coordinates
+        // Validate inputs
+      let isDepartValid = depart === 'FST' || depart === 'Current Location' || validCoordPattern.test(depart);
+      let isDestinationValid = destination === 'FST' || destination === 'Current Location' || validCoordPattern.test(destination);
 
-      if (depart && destination) {
-        this.router.navigate(['/dashboard/UniRide/findride', depart, destination]);
+
+      // if location is set to FST
+      if (depart === 'FST') {
+        depart = '36.8116786,10.0614824';
+      }
+      if (destination === 'FST') {
+        destination = '36.8116786,10.0614824';
+      }
+
+      // If the input is "Current Location", get user's current location
+      if (depart === 'Current Location' || destination === 'Current Location') {
+        if (depart === 'Current Location') {
+          depart = this.CL;
+        }
+        if (destination === 'Current Location') {
+          destination = this.CL;
+        }
+      }
+
+      if (destination !== 'Insert Coordinates') {
+        if (depart && destination) {
+          this.router.navigate(['/dashboard/UniRide/findride', depart, destination]);
+        } else {
+          // Display an alert or some other message to indicate that both values need to be filled in
+          const toast = await this.toastController.create({
+            message: 'Both departure and destination coordinates must be filled in.',
+            duration: 2000
+          });
+          toast.present();
+        }
       } else {
-        // Display an alert or some other message to indicate that both values need to be filled in
+        // Display an alert or some other message to indicate that the destination must be chosen
         const toast = await this.toastController.create({
-          message: 'Both departure and destination coordinates must be filled in.',
+          message: 'Make sure you choose a depart location.',
           duration: 2000
         });
         toast.present();
       }
+    } else {
+      // Display an alert or some other message to indicate that a route must be set
+      const toast = await this.toastController.create({
+        message: 'Make sure you set a route.',
+        duration: 2000
+      });
+      toast.present();
     }
   }
+
+
 }

@@ -12,6 +12,7 @@ import { MyCalanderPage } from './my-calander/my-calander.page';
 import { CoursePage } from './features/course-mate/course/course.page';
 import { AdminPageModule } from './admin/admin.module';
 import { AdminPage } from './admin/admin.page';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -152,6 +153,7 @@ const routes: Routes = [
     path: 'setup/department',
     loadChildren: () => import('./login/dep-section/dep-section-routing.module').then( m => m.DepSectionPageRoutingModule)
   },
+  { path: '**', component: NotFoundComponent },
 
 ];
 

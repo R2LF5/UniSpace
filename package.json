@@ -6,10 +6,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ionic build && ionic cap add android",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
+    
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "@capacitor/keyboard": "5.0.2",
     "@capacitor/status-bar": "5.0.2",
     "@ionic-native/geolocation": "^5.36.0",
+    "@ionic-native/local-notifications": "^5.36.0",
     "@ionic/angular": "^7.0.0",
     "@types/googlemaps": "^3.43.3",
     "autosize": "^6.0.1",

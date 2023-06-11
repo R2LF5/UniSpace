@@ -139,6 +139,10 @@ export class DashboardPage implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('idLogin');
+    localStorage.removeItem('photo');
+    localStorage.removeItem('id');
+    localStorage.removeItem('firstLogin');
+
 
     // Navigate to login page
     this.router.navigate(['/login']);
@@ -269,7 +273,7 @@ export class DashboardPage implements OnInit {
           text: 'Sign Out',
           icon: 'log-out',
           handler: () => {
-            console.log('Sign out clicked');
+            this.logout();
           }
         }, {
           text: 'Cancel',

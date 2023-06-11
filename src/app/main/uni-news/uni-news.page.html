@@ -11,7 +11,7 @@
       <div class="flex justify-between p-4">
         <div class="flex space-x-4">
           <div class="hidden sm:block">
-            <img [src]="currentUser?.photo ?? '../../../assets/DefaultProfile.png'" alt="profile picture" class="object-cover w-12 h-12 rounded-full bg-gray-500">
+            <img [src]="currentUser.photo ?? '../../../assets/DefaultProfile.png'" alt="profile picture" class="object-cover w-12 h-12 rounded-full bg-gray-500">
           </div>
           <div class="flex items-center justify-center ">
           <!-- text area that automatically increases in height using tailwind and ionic  -->
@@ -95,19 +95,19 @@
           <!-- forum stuff -->
           <!-- Text Area for Description -->
           <ion-item>
-            <ion-input label="Event Title"   labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input label="Event Title"  formControlName="eventTitle"  labelPlacement="floating" placeholder="Enter text"></ion-input>
 
           </ion-item>
           <ion-item>
-            <ion-input  label="Description"  labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input  label="Description"  formControlName="description" labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input  label="Location"  labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input  label="Location"  formControlName="location" labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input  label="Guest Number" type="number"  labelPlacement="floating" placeholder="Enter text"></ion-input>
+            <ion-input  label="Guest Number"  formControlName="guestNumber" type="number"  labelPlacement="floating" placeholder="Enter text"></ion-input>
           </ion-item>
 
           <!-- Calendar Input for Event Date and Time -->
@@ -115,7 +115,7 @@
             <ion-label position="stacked">Date and Time</ion-label>
             <div class="w-full flex justify-center items-center">
               <!-- <ion-datetime class="scale-90 rounded-xl" displayFormat="D MMM YYYY H:mm" formControlName="datetime" mode="ios" [min]="today"></ion-datetime> -->
-              <ion-datetime class="scale-90 rounded-xl" mode="ios" locale="es-ES" ></ion-datetime>
+              <ion-datetime class="scale-90 rounded-xl" mode="ios"  ></ion-datetime>
             </div>
           </ion-item>
 

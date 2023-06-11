@@ -2,10 +2,9 @@
 
 <ion-content [fullscreen]="true">
 <!-- Admin page header -->
-<div class=" py-3 mt-10 border-b-2 border-gray-500">
+<div class=" py-3 pb-1 border-b-2 border-gray-500">
   <div class="container mx-auto px-2 flex flex-col items-center">
     <h1 class="text-3xl font-semibold font-sans  ml-6 text-Space dark:text-white">User Management</h1>
-    <ion-button color="secondary" fill="outline"  (click)="userNumbers()">Number of Users</ion-button>
   </div>
 </div>
 
@@ -47,7 +46,7 @@
       </thead>
       <tbody class="">
         <tr class="border-b-2 border-gray-300" *ngFor="let user of users">
-          <td class="px-6 py-4 whitespace-nowrap text-sm  font-semibold text-Space">{{user.firstName}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm  font-semibold text-Space">{{user.firstName}} {{user.lastName}} </td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-sans font-semibold text-Space">{{user.email}}/td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-sans font-semibold text-Space">{{user.role}}</td>
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

@@ -4,12 +4,12 @@ import { ActionSheetController } from '@ionic/angular';
 import { PostService } from '../../services/post.service';
 import { UserUniService } from '../../services/user-uni.service';
 import { EventService } from '../../services/event.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { formatDistanceToNow } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { ToastController } from '@ionic/angular';
 import { User } from '../../models/user.model';
 
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-uni-news',
@@ -28,26 +28,30 @@ export class UniNewsPage implements OnInit {
     private postService: PostService,
     private router: Router,
     private actionSheetController: ActionSheetController,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private userUniService: UserUniService,
     private eventService: EventService,
 
 
   ) {
     this.userRole = localStorage.getItem('role') || '';
-    this.updateForm = this.formBuilder.group({
+    this.updateForm = this.fb.group({
       description:[''],
       timestamp: [''],
       type: ['Update'],
       hidden: ['false']
     });
-    this.eventForm = this.formBuilder.group({
-      description: [''],
-      datetime: [''],
-      department: [''],
+    this.eventForm = this.fb.group({
+      eventTitle: new FormControl(''),
+      description: new FormControl(''),
+      location: new FormControl(''),
+      guestNumber: new FormControl(''),
+      dateTime: new FormControl(''),
+      department: new FormControl(''),
+      image: new FormControl(null)
     });
 
-    this.assignmentForm = this.formBuilder.group({
+    this.assignmentForm = this.fb.group({
       description: [''],
       datetime: [''],
       section: [''],
@@ -156,7 +160,7 @@ export class UniNewsPage implements OnInit {
       const timestamp = timeData.datetime;
 
       if (role=='Admin'){
-        this.updateForm = this.formBuilder.group({
+        this.updateForm = this.fb.group({
           description: [this.descUpdate],
           timestamp: timestamp,
           type: 'Update',
@@ -170,7 +174,7 @@ export class UniNewsPage implements OnInit {
 
         });
       }else if(role=='Professor'){
-        this.updateForm = this.formBuilder.group({
+        this.updateForm = this.fb.group({
           description: [this.descUpdate],
           timestamp: timestamp,
           type: 'Update',
